@@ -24,6 +24,7 @@ public class Db {
     private static final String
             ID = "identifier",
             IS_SERVER_CONFIGURED = "isServerConfigured",
+            IS_SENT_DATA = "isSendData",
             IS_AUTO_SYNCH = "isAutoSynch",
             SERVER_ADDRESS = "serverAddress";
 
@@ -32,6 +33,7 @@ public class Db {
 
             IS_ALLOW_EDIT_CODE = "isAllowEditCode", // edit during scanning (ScanActivity)
             IS_ALLOW_EDIT_ORDER = "isAllowEditOrder", // edit orders (only delete Code) (OrderActivity)
-            IS_ADD_GPS = "isAddGPS"; // add or not GPS (ScanActivity)
+            IS_ADD_GPS = "isAddGPS", // add or not GPS (ScanActivity)
+            IS_ENABLE_LOGGING = "isEnableLogging"; // add or not GPS (ScanActivity)
 
 }

@@ -5,6 +5,102 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/app_fon"
+    android:orientation="vertical"
+    android:padding="10dp"
     tools:context=".activities.OrderActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:gravity="center"
+        android:minHeight="50dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/so_tv_orderNumber"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="20"
+            android:gravity="center"
+
+            android:text="Order N. 123456789"
+            android:textSize="20sp"
+            tools:layout_editor_absoluteX="183dp"
+            tools:layout_editor_absoluteY="27dp" />
+
+        <ImageView
+            android:id="@+id/so_iv_synchStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_synch_not" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/so_tv_dateTime"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingLeft="10dp"
+            android:text="11 November 11:45"
+            android:textSize="16dp"
+            app:layout_constraintWidth_percent="0.7" />
+
+        <TextView
+            android:id="@+id/so_tv_totalTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:paddingRight="19dp"
+            android:text="00:00:10"
+            android:textSize="17dp" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="20"
+        android:orientation="horizontal"
+        android:paddingTop="10dp">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/o_rv_order"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/s_btn_comeBack"
+            android:layout_width="100dp"
+            android:layout_height="70dp"
+            android:src="@drawable/ic_exit"
+            android:background="@drawable/btn_rounded"
+            android:layout_marginRight="20dp"
+            android:text="Come back" />
+
+        <Button
+            android:id="@+id/s_btn_deleteOrder"
+            android:layout_width="200dp"
+            android:layout_height="70dp"
+            style="@style/btnStyle"
+            android:text="Delete" />
+    </LinearLayout>
+
 
 </LinearLayout>

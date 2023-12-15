@@ -9,7 +9,6 @@ public interface ISettingsActivity {
 
 
     void getSettings();
-    void setSettings();
     void setDefaultSettings();
     void getAndSetConfigurationFromServer();
 
