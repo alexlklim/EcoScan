@@ -65,6 +65,7 @@
     <string name="t_empty_list">No code in order</string>
     <string name="t_save_order_success">Order was successfully saved</string>
     <string name="t_save_order_fail">Something wrong</string>
+    <string name="t_code_not_match_filter">Something wrong</string>
     <string name="order_was_successfully_saved">Order was successfully saved</string>
     <string name="okay">okay</string>
 

@@ -9,6 +9,7 @@ import android.Manifest;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
@@ -19,9 +20,12 @@ import android.widget.TextView;
 import com.alex.ecoscan.R;
 import com.alex.ecoscan.adapters.CodeAdapter;
 import com.alex.ecoscan.database.RoomDB;
+import com.alex.ecoscan.managers.DialogMng;
 import com.alex.ecoscan.managers.SettingsMng;
+import com.alex.ecoscan.managers.Tost;
 import com.alex.ecoscan.model.Code;
 import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.Task;
 
 import java.util.LinkedList;
@@ -38,16 +42,50 @@ public class ScanActivity extends AppCompatActivity implements CodeAdapter.OnIte
     private RecyclerView recyclerView;
     private CodeAdapter codeAdapter;
 
+    private Context context;
+    String orderNumber;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scan);
 
+        roomDB = RoomDB.getInstance(context);
+        context = getApplicationContext();
+        settingsMng = new SettingsMng(this);
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
+        getLastLocation();
+
+        // for getting and filtering codes
+        IntentFilter filter = new IntentFilter();
+        filter.addCategory(Intent.CATEGORY_DEFAULT);
+        filter.addAction(getResources().getString(R.string.activity_intent_filter_action));
+        registerReceiver(myBroadcastReceiver, filter);
+
+
         setOrderNum();
         initializeRecyclerView();
+        listenerCompleteOrder();
 
 
+    }
+
+    private void saveCodeToLocalMemory(String decodedData, String decodedLabelType){
+        Log.i(TAG, "try to saveNewCodeToLocalMemory: " + decodedData);
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
+        getLastLocation();
+        Code code = filteringData(new Code(
+                decodedData, decodedLabelType,
+                String.valueOf(currentLocation.getLongitude()),
+                String.valueOf(currentLocation.getLatitude())));
+        if (code != null){
+            codeList.add(code);
+            Log.d(TAG, "Code was saved: " + code);
+            codeAdapter.notifyDataSetChanged();
+        } else {
+            Log.d(TAG, "Code was not saved: doesn't match filters : " + code);
+            Tost.show(getString(R.string.t_code_not_match_filter), this);
+        }
     }
 
     @Override
@@ -58,8 +96,9 @@ public class ScanActivity extends AppCompatActivity implements CodeAdapter.OnIte
     }
     private void listenerCompleteOrder() {
         Log.i(TAG, "addListenerForFinish: ");
-        Button sc_btn_doFinishOrder = findViewById(R.id.sc_btn_finish);
-//        sc_btn_doFinishOrder.setOnClickListener(v -> showDialogConfirmationFinishOrder());
+        Button btnComplete = findViewById(R.id.sc_btn_complete);
+        btnComplete.setOnClickListener(v ->
+                DialogMng.confirmCompleteScan(this, getApplicationContext(), roomDB, orderNumber, codeList));
     }
 
     private void initializeRecyclerView() {
@@ -71,7 +110,8 @@ public class ScanActivity extends AppCompatActivity implements CodeAdapter.OnIte
 
     private void setOrderNum() {
         TextView orderNum = findViewById(R.id.sc_tv_orderNum);
-        orderNum.setText(getIntent().getStringExtra("ORDER_NUM"));
+        orderNumber = getIntent().getStringExtra("ORDER_NUM");
+        orderNum.setText(orderNumber);
     }
 
 
@@ -100,6 +140,7 @@ public class ScanActivity extends AppCompatActivity implements CodeAdapter.OnIte
             decodedData = initiatingIntent.getStringExtra(getResources().getString(R.string.datawedge_intent_key_data_legacy));
             decodedLabelType = initiatingIntent.getStringExtra(getResources().getString(R.string.datawedge_intent_key_label_type_legacy));
         }
+        saveCodeToLocalMemory(decodedData, decodedLabelType);
     }
 
     private void getLastLocation() {
@@ -119,5 +160,34 @@ public class ScanActivity extends AppCompatActivity implements CodeAdapter.OnIte
     public void onItemClick(Code code) {
         Log.i(TAG, "onItemClick: ");
         System.out.println("Code: " + code.getCode());
+    }
+
+
+
+    public Code filteringData(Code code) {
+        Log.i(TAG, "filteringData: code");
+        if (settingsMng.isAllowNonUniqueCode() && codeList.stream().anyMatch(c -> c.getCode().equals(code.getCode()))) {
+            Log.d(TAG, "filteringData: CODE NON UNIQUE=");
+            return null;
+        }
+
+        if (settingsMng.isCheckLength()) {
+            Log.d(TAG, "filteringData: isCheckCodeLength=" + settingsMng.isCheckLength());
+            int length = code.getCode().length();
+            if (settingsMng.getLength() != 0 && settingsMng.getLength() != length) return null;
+            if (settingsMng.getLengthMIN() != 0 && settingsMng.getLengthMIN() < length) return null;
+            if (settingsMng.getLengthMAX() != 0 && settingsMng.getLengthMAX() > length) return null;
+        }
+
+        if (settingsMng.isAdvancedFilter()) {
+            Log.d(TAG, "filteringData: isDoAdvancedFilter=" + settingsMng.isAdvancedFilter());
+            String cod = code.getCode();
+            if (settingsMng.getPrefix().equals("") && !cod.startsWith(settingsMng.getPrefix())) return null;
+            if (settingsMng.getSuffix().equals("") && !cod.contains(settingsMng.getSuffix())) return null;
+            if (settingsMng.getEnding().equals("") && !cod.endsWith(settingsMng.getEnding())) return null;
+//            if (settingsMng.getLabels().equals("NONE") && !code.getLabel().equals(settingsMng.getLabels())) return null;
+        }
+        Log.d(TAG, "filteringData: code passed all filters");
+        return code;
     }
 }

@@ -5,6 +5,7 @@ import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
+import com.alex.ecoscan.managers.DateMng;
 import com.alex.ecoscan.model.utiles.Util;
 
 @Entity(tableName = Util.TABLE_NAME_ORDER)
@@ -16,14 +17,11 @@ public class Order {
     @ColumnInfo(name = "orderNum")
     private String orderNum;
 
-    @ColumnInfo(name = "startTime")
-    private String startTime;
-
-    @ColumnInfo(name = "timer")
-    private String timer;
+    @ColumnInfo(name = "date")
+    private String date;
 
     @ColumnInfo(name = "isSynch")
-    private String isSynch;
+    private int isSynch;
 
     @ColumnInfo(name = "isHidden")
     private int isHidden;
@@ -32,20 +30,18 @@ public class Order {
     }
 
     @Ignore
-    public Order(String orderNum, String startTime, String timer, String isSynch, int isHidden) {
+    public Order(String orderNum) {
         this.orderNum = orderNum;
-        this.startTime = startTime;
-        this.timer = timer;
-        this.isSynch = isSynch;
-        this.isHidden = isHidden;
+        this.date = DateMng.getCurrentTimeLikeString();
+        this.isSynch  = 0;
+        this.isHidden = 0;
     }
 
     @Ignore
-    public Order(int ID, String orderNum, String startTime, String timer, String isSynch, int isHidden) {
+    public Order(int ID, String orderNum, String date, int isSynch, int isHidden) {
         this.ID = ID;
         this.orderNum = orderNum;
-        this.startTime = startTime;
-        this.timer = timer;
+        this.date = date;
         this.isSynch = isSynch;
         this.isHidden = isHidden;
     }
@@ -66,27 +62,19 @@ public class Order {
         this.orderNum = orderNum;
     }
 
-    public String getStartTime() {
-        return startTime;
+    public String getDate() {
+        return date;
     }
 
-    public void setStartTime(String startTime) {
-        this.startTime = startTime;
+    public void setDate(String date) {
+        this.date = date;
     }
 
-    public String getTimer() {
-        return timer;
-    }
-
-    public void setTimer(String timer) {
-        this.timer = timer;
-    }
-
-    public String getIsSynch() {
+    public int getIsSynch() {
         return isSynch;
     }
 
-    public void setIsSynch(String isSynch) {
+    public void setIsSynch(int isSynch) {
         this.isSynch = isSynch;
     }
 
@@ -103,8 +91,7 @@ public class Order {
         return "Order{" +
                 "id=" + ID +
                 ", orderNum='" + orderNum + '\'' +
-                ", startTime='" + startTime + '\'' +
-                ", timer='" + timer + '\'' +
+                ", date='" + date + '\'' +
                 ", isSynch='" + isSynch + '\'' +
                 ", isHidden=" + isHidden +
                 '}';

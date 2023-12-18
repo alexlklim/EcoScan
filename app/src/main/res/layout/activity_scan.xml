@@ -47,7 +47,7 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/sc_btn_finish"
+            android:id="@+id/sc_btn_complete"
             android:layout_width="wrap_content"
             style="@style/btnStyle"
             android:layout_height="wrap_content"

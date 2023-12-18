@@ -1,7 +1,5 @@
 package com.alex.ecoscan.managers;
 
-import static android.provider.Settings.System.getString;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -56,8 +54,9 @@ public class DialogMng {
         alertDialog.show();
     }
 
-    public static void confirmCompleteScan (Activity activity, Context context, 
+    public static void confirmCompleteScan (Activity activity, Context context, RoomDB roomDB,
                                             String orderNumber, List<Code> codeList) {
+        Log.d(TAG, "confirmCompleteScan: ");
         LayoutInflater inflater = activity.getLayoutInflater();
         View dialog = inflater.inflate(R.layout.dialog_confirm, null);
 
@@ -68,6 +67,7 @@ public class DialogMng {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         builder.setView(dialog);
+        settingsMng = new SettingsMng(context);
 
         btnYes.setOnClickListener(view -> {
 
@@ -75,7 +75,7 @@ public class DialogMng {
                 Tost.show(context.getString(R.string.t_empty_list), context);
 
             } else {
-                boolean result = DatabaseMng.saveNewOrder(orderNumber, codeList);
+                boolean result = DatabaseMng.saveNewOrder(roomDB, orderNumber, codeList);
                 if (result) {
                     Tost.show(context.getString(R.string.t_save_order_success), context);
                     if (settingsMng.isSentData() && settingsMng.isAutoSynch()){
@@ -101,7 +101,7 @@ public class DialogMng {
         View dialog = inflater.inflate(R.layout.dialog_result, null);
         TextView textResult = dialog.findViewById(R.id.d_text_result);
         ImageView imageResult = dialog.findViewById(R.id.d_save_result);
-        Button btnOkey = dialog.findViewById(R.id.d_btn_okay);
+        Button btnOkay = dialog.findViewById(R.id.d_btn_okay);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         builder.setView(dialog);
@@ -113,7 +113,7 @@ public class DialogMng {
             textResult.setText(context.getString(R.string.t_save_order_fail));
             imageResult.setImageResource(R.drawable.ic_fail);
         }
-        btnOkey.setOnClickListener(v -> {
+        btnOkay.setOnClickListener(v -> {
             alertDialog.dismiss();
             activity.finish();
         });

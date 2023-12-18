@@ -5,9 +5,11 @@ import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
+import com.alex.ecoscan.managers.DateMng;
 import com.alex.ecoscan.model.utiles.Util;
 
 import java.io.Serializable;
+import java.util.Date;
 
 @Entity(tableName = Util.TABLE_NAME_CODE)
 public class Code implements Serializable {
@@ -21,7 +23,7 @@ public class Code implements Serializable {
     @ColumnInfo(name = "label")
     private String label;
     @ColumnInfo(name = "longitude")
-    private String gpsLong;
+    private String gpsLon;
     @ColumnInfo(name = "latitude")
     private String gpsLat;
     @ColumnInfo(name = "orderID")
@@ -31,24 +33,23 @@ public class Code implements Serializable {
     }
 
     @Ignore
-    public Code(int ID, String code, String time, String label, String gpsLong, String gpsLat, int orderID) {
+    public Code(int ID, String code, String time, String label, String gpsLon, String gpsLat, int orderID) {
         this.ID = ID;
         this.code = code;
         this.time = time;
         this.label = label;
-        this.gpsLong = gpsLong;
+        this.gpsLon = gpsLon;
         this.gpsLat = gpsLat;
         this.orderID = orderID;
     }
 
     @Ignore
-    public Code(String code, String time, String label, String gpsLong, String gpsLat, int orderID) {
+    public Code(String code, String label, String gpsLon, String gpsLat) {
         this.code = code;
-        this.time = time;
+        this.time = DateMng.getCurrentTimeLikeString();
         this.label = label;
-        this.gpsLong = gpsLong;
+        this.gpsLon = gpsLon;
         this.gpsLat = gpsLat;
-        this.orderID = orderID;
     }
 
     public int getID() {
@@ -83,12 +84,12 @@ public class Code implements Serializable {
         this.label = label;
     }
 
-    public String getGpsLong() {
-        return gpsLong;
+    public String getGpsLon() {
+        return gpsLon;
     }
 
-    public void setGpsLong(String gpsLong) {
-        this.gpsLong = gpsLong;
+    public void setGpsLon(String gpsLon) {
+        this.gpsLon = gpsLon;
     }
 
     public String getGpsLat() {
@@ -114,7 +115,7 @@ public class Code implements Serializable {
                 ", code='" + code + '\'' +
                 ", time='" + time + '\'' +
                 ", label='" + label + '\'' +
-                ", gpsLong='" + gpsLong + '\'' +
+                ", gpsLong='" + gpsLon + '\'' +
                 ", gpsLat='" + gpsLat + '\'' +
                 ", orderID=" + orderID +
                 '}';
