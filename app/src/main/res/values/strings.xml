@@ -1,4 +1,13 @@
 <resources>
+    <string name="activity_intent_filter_action" translatable="false">com.dwexample.ACTION</string>
+    <string name="datawedge_intent_key_source" translatable="false">com.symbol.datawedge.source</string>
+    <string name="datawedge_intent_key_label_type" translatable="false">com.symbol.datawedge.label_type</string>
+    <string name="datawedge_intent_key_data" translatable="false">com.symbol.datawedge.data_string</string>
+    <string name="datawedge_intent_key_source_legacy" translatable="false">com.motorolasolutions.emdk.datawedge.source</string>
+    <string name="datawedge_intent_key_label_type_legacy" translatable="false">com.motorolasolutions.emdk.datawedge.label_type</string>
+    <string name="datawedge_intent_key_data_legacy" translatable="false">com.motorolasolutions.emdk.datawedge.data_string</string>
+
+
     <string name="app_name">EcoScan</string>
     <string name="new_order">New order</string>
     <string name="check_orders">Check orders</string>
@@ -43,4 +52,7 @@
     <string name="clear_all_data">Clear all data</string>
     <string name="get_settings_from_server">Get Settings from server</string>
     <string name="reset_settings">Reset Settings</string>
+    <string name="enter_the_order_number">Enter the order number</string>
+    <string name="order_number">order number</string>
+    <string name="create_new_order">Create new order</string>
 </resources>

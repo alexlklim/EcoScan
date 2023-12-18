@@ -1,5 +1,6 @@
 package com.alex.ecoscan.database;
 
+import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
@@ -10,6 +11,7 @@ import com.alex.ecoscan.model.Order;
 
 import java.util.List;
 
+@Dao
 public interface OrderDAO {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
@@ -22,10 +24,13 @@ public interface OrderDAO {
     List<Order> getNonSynch();
 
     @Query("SELECT * FROM orders WHERE orderNum= :orderNum")
-    Order getByOrderNum(String orderNum);
+    Order getOrderByOrderNum(String orderNum);
 
     @Query("SELECT * FROM orders WHERE id = :orderID")
-    Order getByOrderID(int orderID);
+    Order getOrderByOrderID(int orderID);
+
+    @Query(("SELECT ID FROM orders WHERE orderNum = :orderNum"))
+    int getOrderIDByOrderNum(String orderNum);
 
     @Query("SELECT EXISTS(SELECT 1 FROM orders WHERE orderNum= :orderNum LIMIT 1)")
     boolean isExistByOrderNum(String orderNum);

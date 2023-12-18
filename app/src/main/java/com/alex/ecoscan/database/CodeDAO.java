@@ -1,5 +1,6 @@
 package com.alex.ecoscan.database;
 
+import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
@@ -9,6 +10,7 @@ import com.alex.ecoscan.model.Code;
 
 import java.util.List;
 
+@Dao
 public interface CodeDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(Code code);
