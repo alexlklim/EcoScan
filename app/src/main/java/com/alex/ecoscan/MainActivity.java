@@ -13,13 +13,12 @@ import android.widget.ImageButton;
 
 import com.alex.ecoscan.activities.LoginActivity;
 import com.alex.ecoscan.activities.OrdersActivity;
+import com.alex.ecoscan.activities.SettingsActivity;
 import com.alex.ecoscan.managers.DialogMng;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
     private Context context;
-    private Button btnGoScan, btnGoOrders;
-    private ImageButton btnGoSettings;
     private AlertDialog alertDialog;
 
 
@@ -28,10 +27,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Button btnGoScan = findViewById(R.id.m_btn_scan);
+        Button btnGoOrders = findViewById(R.id.m_btn_orders);
+        ImageButton btnGoSettings = findViewById(R.id.m_btn_settings);
 
-        btnGoScan = findViewById(R.id.m_btn_scan);
-        btnGoOrders = findViewById(R.id.m_btn_orders);
-        btnGoSettings = findViewById(R.id.m_btn_settings);
+        // if identifier is null -> generate new identifier and set it
+        // if autoSynch is true -> synch not synch orders
+
 
 
         btnGoScan.setOnClickListener(view -> {
@@ -39,11 +41,10 @@ public class MainActivity extends AppCompatActivity {
         });
         btnGoOrders.setOnClickListener(view -> 
                 startActivity(new Intent(MainActivity.this, OrdersActivity.class)));
-        btnGoSettings.setOnClickListener(view -> 
-                startActivity(new Intent(MainActivity.this, LoginActivity.class)));
-
-
-
+        btnGoSettings.setOnClickListener(view ->
+                // if enableLogin is true -> open LoginActivity
+                // else -> SettingsActivity
+                startActivity(new Intent(MainActivity.this, SettingsActivity.class)));
 
     }
 }
