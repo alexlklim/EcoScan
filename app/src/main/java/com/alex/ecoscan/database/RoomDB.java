@@ -8,7 +8,7 @@ import androidx.room.RoomDatabase;
 
 import com.alex.ecoscan.model.Code;
 import com.alex.ecoscan.model.Order;
-import com.alex.ecoscan.model.Util;
+import com.alex.ecoscan.model.utiles.Util;
 
 
 @Database(entities = {Code.class, Order.class}, version = Util.DATABASE_VERSION, exportSchema = false)

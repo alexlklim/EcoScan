@@ -4,6 +4,8 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import com.alex.ecoscan.model.utiles.Util;
+
 import java.io.Serializable;
 
 @Entity(tableName = Util.TABLE_NAME_CODE)

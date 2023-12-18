@@ -1,4 +1,4 @@
-package com.alex.ecoscan.model;
+package com.alex.ecoscan.model.utiles;
 
 public class Util {
 
