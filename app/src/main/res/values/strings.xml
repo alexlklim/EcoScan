@@ -23,7 +23,7 @@
     <string name="synch">synch</string>
     <string name="menu">Menu</string>
     <string name="code_rv">Code:</string>
-    <string name="type_rv">Type:</string>
+    <string name="label_rv">Type:</string>
     <string name="ecoscan_settings">EcoScan Settings</string>
     <string name="filter">Filter</string>
     <string name="allow_non_unique_code">Allow non unique code</string>
@@ -43,7 +43,7 @@
     <string name="language">Language</string>
     <string name="change_login">Change login</string>
     <string name="change_password">Change password</string>
-    <string name="_000">000</string>
+    <string name="_000">0000</string>
     <string name="label_types">Label Types</string>
     <string name="data_management">Data Management</string>
     <string name="hide_synch_data">Hide synch data</string>
@@ -55,4 +55,18 @@
     <string name="enter_the_order_number">Enter the order number</string>
     <string name="order_number">order number</string>
     <string name="create_new_order">Create new order</string>
+    <string name="are_you_sure">Are you sure?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+
+
+
+    <string name="d_complete_order">Do you want to complete order?</string>
+    <string name="t_empty_list">No code in order</string>
+    <string name="t_save_order_success">Order was successfully saved</string>
+    <string name="t_save_order_fail">Something wrong</string>
+    <string name="order_was_successfully_saved">Order was successfully saved</string>
+    <string name="okay">okay</string>
+
+
 </resources>

@@ -2,6 +2,8 @@ package com.alex.ecoscan.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
 import android.content.BroadcastReceiver;
@@ -11,27 +13,65 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Button;
+import android.widget.TextView;
 
 import com.alex.ecoscan.R;
 import com.alex.ecoscan.adapters.CodeAdapter;
 import com.alex.ecoscan.database.RoomDB;
 import com.alex.ecoscan.managers.SettingsMng;
+import com.alex.ecoscan.model.Code;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.tasks.Task;
 
-public class ScanActivity extends AppCompatActivity {
+import java.util.LinkedList;
+import java.util.List;
+
+public class ScanActivity extends AppCompatActivity implements CodeAdapter.OnItemClickListener{
     private static final String TAG = "ScanActivity";
     private Location currentLocation;
     private FusedLocationProviderClient fusedLocationProviderClient;
     private SettingsMng settingsMng;
+    private RoomDB roomDB;
+    private List<Code> codeList = new LinkedList<>();
+    private String orderNum;
+    private RecyclerView recyclerView;
     private CodeAdapter codeAdapter;
-    RoomDB roomDB;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scan);
+
+        setOrderNum();
+        initializeRecyclerView();
+
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        Log.i(TAG, "onDestroy");
+        super.onDestroy();
+        unregisterReceiver(myBroadcastReceiver);
+    }
+    private void listenerCompleteOrder() {
+        Log.i(TAG, "addListenerForFinish: ");
+        Button sc_btn_doFinishOrder = findViewById(R.id.sc_btn_finish);
+//        sc_btn_doFinishOrder.setOnClickListener(v -> showDialogConfirmationFinishOrder());
+    }
+
+    private void initializeRecyclerView() {
+        recyclerView = findViewById(R.id.sc_rv_codes);
+        codeAdapter = new CodeAdapter(codeList, this);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(codeAdapter);
+    }
+
+    private void setOrderNum() {
+        TextView orderNum = findViewById(R.id.sc_tv_orderNum);
+        orderNum.setText(getIntent().getStringExtra("ORDER_NUM"));
     }
 
 
@@ -73,4 +113,11 @@ public class ScanActivity extends AppCompatActivity {
     }
 
 
+
+
+    @Override
+    public void onItemClick(Code code) {
+        Log.i(TAG, "onItemClick: ");
+        System.out.println("Code: " + code.getCode());
+    }
 }

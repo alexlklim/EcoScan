@@ -93,10 +93,14 @@ public class SettingsMng implements ISettingsMng {
 
     @Override
     public void setClientConfig(int identifier, String lang) {
-        pref.edit().putInt(Db.IDENTIFIER, identifier).apply();
-        pref.edit().putString(Db.LANG, lang).apply();
-
+        pref.edit().putInt(Db.IDENTIFIER, identifier)
+                .putString(Db.LANG, lang)
+                .apply();
     }
+    @Override
+    public void setIdentifier(int identifier) {
+        pref.edit().putInt(Db.IDENTIFIER, identifier).apply();}
+
 
     @Override
     public void setNewLogin(String login) {
@@ -219,7 +223,7 @@ public class SettingsMng implements ISettingsMng {
 
 
     public int getIdentifier() {
-        return pref.getInt(Db.IDENTIFIER, 100000);
+        return pref.getInt(Db.IDENTIFIER, 0);
     }
     public String getLang() {
         return pref.getString(Db.LANG, Lang.EN.getCode());

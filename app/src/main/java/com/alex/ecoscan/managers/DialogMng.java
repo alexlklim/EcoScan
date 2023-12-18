@@ -1,5 +1,7 @@
 package com.alex.ecoscan.managers;
 
+import static android.provider.Settings.System.getString;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -8,17 +10,23 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 
 import com.alex.ecoscan.R;
 import com.alex.ecoscan.activities.ScanActivity;
 import com.alex.ecoscan.database.RoomDB;
+import com.alex.ecoscan.model.Code;
+
+import java.util.List;
 
 public class DialogMng {
     private static final String TAG = "DialogMng";
 
     static AlertDialog alertDialog;
+    static SettingsMng settingsMng;
 
 
     public static void inputOrderNum(Activity activity, Context context) {
@@ -46,6 +54,72 @@ public class DialogMng {
         });
         alertDialog = builder.create();
         alertDialog.show();
+    }
+
+    public static void confirmCompleteScan (Activity activity, Context context, 
+                                            String orderNumber, List<Code> codeList) {
+        LayoutInflater inflater = activity.getLayoutInflater();
+        View dialog = inflater.inflate(R.layout.dialog_confirm, null);
+
+        TextView textConfirm = dialog.findViewById(R.id.d_confirm);
+        textConfirm.setText(R.string.d_complete_order);
+        Button btnYes = dialog.findViewById(R.id.d_btn_yes);
+        Button btnNo = dialog.findViewById(R.id.d_btn_no);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        builder.setView(dialog);
+
+        btnYes.setOnClickListener(view -> {
+
+            if (codeList.isEmpty()){
+                Tost.show(context.getString(R.string.t_empty_list), context);
+
+            } else {
+                boolean result = DatabaseMng.saveNewOrder(orderNumber, codeList);
+                if (result) {
+                    Tost.show(context.getString(R.string.t_save_order_success), context);
+                    if (settingsMng.isSentData() && settingsMng.isAutoSynch()){
+                        // sent new order to server
+                    }
+                } else {
+                    Tost.show(context.getString(R.string.t_save_order_fail), context);
+
+                }
+                alertDialog.dismiss();
+                resultOfSavingOrder(activity, context, result);
+            }
+
+        });
+        btnNo.setOnClickListener(v -> alertDialog.dismiss());
+
+        alertDialog = builder.create();
+        alertDialog.show();
+    }
+
+    private static void resultOfSavingOrder(Activity activity, Context context, boolean result) {
+        LayoutInflater inflater = activity.getLayoutInflater();
+        View dialog = inflater.inflate(R.layout.dialog_result, null);
+        TextView textResult = dialog.findViewById(R.id.d_text_result);
+        ImageView imageResult = dialog.findViewById(R.id.d_save_result);
+        Button btnOkey = dialog.findViewById(R.id.d_btn_okay);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        builder.setView(dialog);
+
+        if (result){
+            textResult.setText(context.getString(R.string.t_save_order_success));
+            imageResult.setImageResource(R.drawable.ic_success);
+        } else {
+            textResult.setText(context.getString(R.string.t_save_order_fail));
+            imageResult.setImageResource(R.drawable.ic_fail);
+        }
+        btnOkey.setOnClickListener(v -> {
+            alertDialog.dismiss();
+            activity.finish();
+        });
+        alertDialog = builder.create();
+        alertDialog.show();
+
     }
 
 }

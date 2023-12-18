@@ -16,7 +16,7 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/sc_tv_order"
+            android:id="@+id/sc_tv_orderNum"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"

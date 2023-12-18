@@ -13,11 +13,11 @@
 
 
     <TextView
-        android:id="@+id/r_type"
+        android:id="@+id/r_label"
         android:layout_width="wrap_content"
         android:layout_weight="2"
         android:layout_height="wrap_content"
-        android:text="@string/type_rv"/>
+        android:text="@string/label_rv"/>
 
 
 

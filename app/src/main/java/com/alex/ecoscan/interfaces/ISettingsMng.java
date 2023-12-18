@@ -23,6 +23,7 @@ public interface ISettingsMng {
     void setServerAddress(String serverAddress);
 
     void setClientConfig(int identifier, String lang);
+    void setIdentifier(int identifier);
     void setNewLogin(String login);
     void setNewPw(String pw);
 
