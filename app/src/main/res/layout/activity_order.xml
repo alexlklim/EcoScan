@@ -15,7 +15,8 @@
         android:layout_margin="10dp"
         android:gravity="center"
         android:minHeight="50dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        tools:ignore="UseCompoundDrawables">
 
         <TextView
             android:id="@+id/so_tv_orderNumber"
@@ -23,8 +24,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="20"
             android:gravity="center"
-
-            android:text="Order N. 123456789"
+            android:text=""
             android:textSize="20sp"
             tools:layout_editor_absoluteX="183dp"
             tools:layout_editor_absoluteY="27dp" />
@@ -33,6 +33,7 @@
             android:id="@+id/so_iv_synchStatus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:contentDescription="@string/synchronize"
             android:src="@drawable/ic_synch_not" />
     </LinearLayout>
 
@@ -40,27 +41,29 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:gravity="center"
+        android:gravity="start"
         android:orientation="horizontal">
 
         <TextView
             android:id="@+id/so_tv_dateTime"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:paddingLeft="10dp"
-            android:text="11 November 11:45"
-            android:textSize="16dp"
-            app:layout_constraintWidth_percent="0.7" />
+            android:minWidth="150dp"
+            android:paddingStart="20dp"
+            android:text=""
+            android:textSize="16sp"
+            app:layout_constraintWidth_percent="0.7"
+            tools:ignore="RtlSymmetry" />
 
         <TextView
             android:id="@+id/so_tv_totalTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingLeft="10dp"
-            android:paddingRight="19dp"
-            android:text="00:00:10"
-            android:textSize="17dp" />
+            android:minWidth="100dp"
+            android:paddingStart="10dp"
+            android:paddingEnd="19dp"
+            android:text=""
+            android:textSize="17sp" />
     </LinearLayout>
 
 
@@ -91,15 +94,15 @@
             android:layout_height="70dp"
             android:src="@drawable/ic_exit"
             android:background="@drawable/btn_rounded"
-            android:layout_marginRight="20dp"
-            android:text="Come back" />
+            android:layout_marginEnd="20dp"
+            android:contentDescription="@string/come_back" />
 
         <Button
             android:id="@+id/s_btn_deleteOrder"
             android:layout_width="200dp"
             android:layout_height="70dp"
             style="@style/btnStyle"
-            android:text="Delete" />
+            android:text="@string/delete" />
     </LinearLayout>
 
 

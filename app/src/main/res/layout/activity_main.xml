@@ -16,20 +16,25 @@
 
         <Button
             android:id="@+id/m_btn_scan"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:minHeight="80dp"
             android:layout_margin="40dp"
-            android:text="New order" />
+            style="@style/btnStyle"
+            android:minWidth="300dp"
+            android:minHeight="80dp"
+            android:text="@string/new_order" />
 
         <Button
             android:id="@+id/m_btn_orders"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            style="@style/btnStyle"
+            android:minWidth="300dp"
             android:minHeight="80dp"
+
             android:layout_marginLeft="40dp"
             android:layout_marginRight="40dp"
-            android:text="Check orders" />
+            android:text="@string/check_orders" />
     </LinearLayout>
 
     <LinearLayout
@@ -46,7 +51,7 @@
             android:background="@android:color/transparent"
             android:scaleType="fitCenter"
             android:layout_gravity="end"
-            android:contentDescription="Settings"
+            android:contentDescription="@string/settings"
             app:srcCompat="@drawable/ic_setting" />
     </LinearLayout>
 

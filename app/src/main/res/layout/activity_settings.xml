@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/app_fon"
-    android:contentDescription="Settings"
+    android:contentDescription="@string/settings"
     tools:context=".activities.SettingsActivity">
 
 
@@ -21,7 +21,7 @@
             android:textSize="30sp"
             android:gravity="center"
             android:layout_margin="10dp"
-            android:text="EcoScan Settings" />
+            android:text="@string/ecoscan_settings" />
 
 
 
@@ -37,13 +37,15 @@
                 android:paddingStart="10dp"
                 android:background="#90FFFFFF"
                 android:gravity="center_vertical"
-                android:text="Filter" />
+                android:text="@string/filter"
+                tools:ignore="RtlSymmetry" />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#60FFFFFF"
                 android:layout_marginStart="10dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:baselineAligned="false">
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -56,21 +58,21 @@
                         android:textSize="20sp"
                         android:layout_marginBottom="5dp"
                         android:gravity="center_vertical"
-                        android:text="Allow non unique code" />
+                        android:text="@string/allow_non_unique_code" />
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:textSize="20sp"
                         android:layout_marginBottom="5dp"
                         android:gravity="center_vertical"
-                        android:text="Check length" />
+                        android:text="@string/check_length" />
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:textSize="20sp"
                         android:layout_marginBottom="5dp"
                         android:gravity="center_vertical"
-                        android:text="Advanced Filter" />
+                        android:text="@string/advanced_filter" />
 
                 </LinearLayout>
                 <LinearLayout
@@ -118,13 +120,15 @@
                 android:paddingStart="10dp"
                 android:background="#90FFFFFF"
                 android:gravity="center_vertical"
-                android:text="Admin Configuration" />
+                android:text="@string/admin_configuration"
+                tools:ignore="RtlSymmetry" />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#60FFFFFF"
                 android:layout_marginStart="10dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:baselineAligned="false">
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -137,21 +141,21 @@
                         android:textSize="20sp"
                         android:layout_marginBottom="5dp"
                         android:gravity="center_vertical"
-                        android:text="Allow edit during scanning" />
+                        android:text="@string/allow_edit_during_scanning" />
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:textSize="20sp"
                         android:layout_marginBottom="5dp"
                         android:gravity="center_vertical"
-                        android:text="Allow edit orders" />
+                        android:text="@string/allow_edit_orders" />
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:textSize="20sp"
                         android:layout_marginBottom="5dp"
                         android:gravity="center_vertical"
-                        android:text="Add Location to code" />
+                        android:text="@string/add_location_to_code" />
                     <TextView
                         android:id="@+id/set_clearAllData"
                         android:layout_width="match_parent"
@@ -159,7 +163,7 @@
                         android:textSize="20sp"
                         android:layout_marginBottom="5dp"
                         android:gravity="center_vertical"
-                        android:text="Enable logging" />
+                        android:text="@string/enable_logging" />
 
                 </LinearLayout>
                 <LinearLayout
@@ -169,24 +173,30 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
                     android:orientation="vertical">
+
                     <CheckBox
                         android:id="@+id/set_isAllowEditCode"
                         android:layout_width="wrap_content"
                         android:layout_height="50dp"
                         android:layout_marginBottom="5dp"
-                        android:text="" />
+                        android:text=""
+                        tools:ignore="DuplicateSpeakableTextCheck" />
+
                     <CheckBox
                         android:id="@+id/set_isAllowEditOrder"
                         android:layout_width="wrap_content"
                         android:layout_height="50dp"
                         android:layout_marginBottom="5dp"
-                        android:text="" />
+                        android:text=""
+                        tools:ignore="DuplicateSpeakableTextCheck" />
+
                     <CheckBox
                         android:id="@+id/set_isAddGPS"
                         android:layout_width="wrap_content"
                         android:layout_height="50dp"
                         android:layout_marginBottom="5dp"
-                        android:text="" />
+                        android:text=""
+                        tools:ignore="DuplicateSpeakableTextCheck" />
                     <CheckBox
                         android:id="@+id/set_isEnableLogging"
                         android:layout_width="wrap_content"
@@ -212,13 +222,15 @@
                 android:paddingStart="10dp"
                 android:background="#90FFFFFF"
                 android:gravity="center_vertical"
-                android:text="Server Configuration" />
+                android:text="@string/server_configuration"
+                tools:ignore="RtlSymmetry" />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#60FFFFFF"
                 android:layout_marginStart="10dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:baselineAligned="false">
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -231,14 +243,14 @@
                         android:textSize="20sp"
                         android:layout_marginBottom="5dp"
                         android:gravity="center_vertical"
-                        android:text="Send data to server" />
+                        android:text="@string/send_data_to_server" />
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:textSize="20sp"
                         android:layout_marginBottom="5dp"
                         android:gravity="center_vertical"
-                        android:text="Autosynchronization" />
+                        android:text="@string/autosynchronization" />
                     <TextView
                         android:id="@+id/set_configureServer"
                         android:layout_width="match_parent"
@@ -246,7 +258,7 @@
                         android:textSize="20sp"
                         android:layout_marginBottom="5dp"
                         android:gravity="center_vertical"
-                        android:text="Configure server" />
+                        android:text="@string/configure_server" />
 
                 </LinearLayout>
                 <LinearLayout
@@ -261,13 +273,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="50dp"
                         android:layout_marginBottom="5dp"
-                        android:text="" />
+                        android:contentDescription="@string/send_data_to_server" />
                     <CheckBox
                         android:id="@+id/set_isAutoSynch"
                         android:layout_width="wrap_content"
                         android:layout_height="50dp"
                         android:layout_marginBottom="5dp"
-                        android:text="" />
+                        android:contentDescription="@string/autosynchronization" />
 
 
                 </LinearLayout>
@@ -288,13 +300,15 @@
                 android:paddingStart="10dp"
                 android:background="#90FFFFFF"
                 android:gravity="center_vertical"
-                android:text="Client Configuration" />
+                android:text="@string/client_configuration"
+                tools:ignore="RtlSymmetry" />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#60FFFFFF"
                 android:layout_marginStart="10dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:baselineAligned="false">
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -307,14 +321,14 @@
                         android:textSize="20sp"
                         android:layout_marginBottom="5dp"
                         android:gravity="center_vertical"
-                        android:text="Identifier" />
+                        android:text="@string/identifier" />
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:textSize="20sp"
                         android:layout_marginBottom="5dp"
                         android:gravity="center_vertical"
-                        android:text="Language" />
+                        android:text="@string/language" />
 
                     <TextView
                         android:id="@+id/set_changeLogin"
@@ -323,7 +337,7 @@
                         android:textSize="20sp"
                         android:layout_marginBottom="5dp"
                         android:gravity="center_vertical"
-                        android:text="Change login" />
+                        android:text="@string/change_login" />
                     <TextView
                         android:id="@+id/set_changePw"
                         android:layout_width="match_parent"
@@ -331,7 +345,7 @@
                         android:textSize="20sp"
                         android:layout_marginBottom="5dp"
                         android:gravity="center_vertical"
-                        android:text="Change password" />
+                        android:text="@string/change_password" />
 
 
                 </LinearLayout>
@@ -350,15 +364,15 @@
                         android:ems="10"
                         android:inputType="number"
                         android:text=""
-                        android:hint="000 000"
-                        tools:ignore="TouchTargetSizeCheck" />
+                        android:hint="@string/_000"
+                        tools:ignore="TouchTargetSizeCheck,VisualLintTextFieldSize"
+                        android:importantForAutofill="no" />
                     <Spinner
                         android:id="@+id/set_lang"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:layout_gravity="end"
-                        android:layout_weight="1"
-                        android:contentDescription="Label Types"
+                        android:contentDescription="@string/label_types"
                         android:minHeight="48dp" />
 
 
@@ -380,13 +394,15 @@
                 android:paddingStart="10dp"
                 android:background="#90FFFFFF"
                 android:gravity="center_vertical"
-                android:text="Data Management" />
+                android:text="@string/data_management"
+                tools:ignore="RtlSymmetry" />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#60FFFFFF"
                 android:layout_marginStart="10dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:baselineAligned="false">
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -399,7 +415,7 @@
                         android:textSize="20sp"
                         android:layout_marginBottom="5dp"
                         android:gravity="center_vertical"
-                        android:text="Hide synch data" />
+                        android:text="@string/hide_synch_data" />
                     <TextView
                         android:id="@+id/set_sendAllData"
                         android:layout_width="match_parent"
@@ -407,7 +423,7 @@
                         android:textSize="20sp"
                         android:layout_marginBottom="5dp"
                         android:gravity="center_vertical"
-                        android:text="Sent all data to server" />
+                        android:text="@string/sent_all_data_to_server" />
                     <TextView
                         android:id="@+id/set_deleteSynchData"
                         android:layout_width="match_parent"
@@ -415,14 +431,14 @@
                         android:textSize="20sp"
                         android:layout_marginBottom="5dp"
                         android:gravity="center_vertical"
-                        android:text="Delete synch data" />
+                        android:text="@string/delete_synch_data" />
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:textSize="20sp"
                         android:layout_marginBottom="5dp"
                         android:gravity="center_vertical"
-                        android:text="Clear all data" />
+                        android:text="@string/clear_all_data" />
 
                 </LinearLayout>
                 <LinearLayout
@@ -461,7 +477,8 @@
                 android:paddingStart="10dp"
                 android:background="#90FFFFFF"
                 android:gravity="center_vertical"
-                android:text="Get Settings from server" />
+                android:text="@string/get_settings_from_server"
+                tools:ignore="RtlSymmetry" />
 
         </LinearLayout>
         <LinearLayout
@@ -479,7 +496,8 @@
                 android:paddingStart="10dp"
                 android:background="#90FFFFFF"
                 android:gravity="center_vertical"
-                android:text="Reset Settings" />
+                android:text="@string/reset_settings"
+                tools:ignore="RtlSymmetry" />
 
         </LinearLayout>
 

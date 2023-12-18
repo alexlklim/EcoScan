@@ -3,7 +3,7 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:gravity="center"
-    android:layout_marginLeft="10dp"
+    android:layout_marginStart="10dp"
     android:padding="7dp">
 
     <TextView
@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="3"
         android:textSize="20sp"
-        android:text="4567865433"/>
+        android:text=""/>
 
     <TextView
         android:id="@+id/r_date"
@@ -20,13 +20,14 @@
         android:layout_height="wrap_content"
         android:layout_weight="2"
         android:textSize="15sp"
-        android:text="11 Nov 12:55"/>
+        android:text=""/>
 
     <ImageView
         android:id="@+id/r_isSynch"
         android:src="@drawable/ic_fail"
         android:layout_width="0dp"
         android:layout_height="20dp"
-        android:layout_weight="1" />
+        android:layout_weight="1"
+        android:contentDescription="@string/delete" />
 
 </LinearLayout>

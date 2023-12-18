@@ -17,19 +17,19 @@
         android:orientation="horizontal">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:textSize="30sp"
             android:gravity="center"
-            android:text="Orders" />
+            android:text="@string/orders" />
 
         <ImageButton
             android:id="@+id/os_menu"
             android:layout_width="60dp"
             android:layout_height="50dp"
             android:background="@android:color/transparent"
-            android:contentDescription="Menu"
+            android:contentDescription="@string/menu"
             app:srcCompat="@drawable/ic_more" />
     </LinearLayout>
 
@@ -44,25 +44,25 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="4"
-            android:text="Title" />
+            android:text="@string/title" />
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
-            android:text="date" />
+            android:text="@string/date" />
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="code" />
+            android:text="@string/code" />
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="synch" />
+            android:text="@string/synch" />
     </LinearLayout>
 
     <ScrollView
