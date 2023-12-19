@@ -68,6 +68,7 @@
     <string name="t_code_not_match_filter">Something wrong</string>
     <string name="order_was_successfully_saved">Order was successfully saved</string>
     <string name="okay">okay</string>
+    <string name="all_labels_are_accepted">All labels are accepted</string>
 
 
 </resources>

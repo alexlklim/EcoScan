@@ -28,23 +28,27 @@ public class SettingsMng implements ISettingsMng {
     }
 
     @Override
-    public void setIsCheckLength(boolean isCheckLength, int length, int min, int max) {
-        pref.edit().putBoolean(Db.IS_CHECK_LENGTH, isCheckLength)
-                .putInt(Db.LENGTH, length)
-                .putInt(Db.LENGTH_MIN, min)
-                .putInt(Db.LENGTH_MAX, max)
-                .apply();
-
+    public void setIsCheckLength(boolean isCheckLength) {
+        pref.edit().putBoolean(Db.IS_CHECK_LENGTH, isCheckLength).apply();
     }
 
     @Override
-    public void setIsAdvancedFilter(boolean isAdvancedFilter,
-                                    String prefix, String suffix, String ending, Set<String> labels) {
-        pref.edit().putBoolean(Db.IS_ADVANCED_FILTER, isAdvancedFilter)
-                .putString(Db.PREFIX, prefix)
+    public void setBlockLength(int length, int min, int max) {
+        pref.edit().putInt(Db.LENGTH, length)
+                .putInt(Db.LENGTH_MIN, min).putInt(Db.LENGTH_MAX, max)
+                .apply();
+    }
+
+    @Override
+    public void setIsAdvancedFilter(boolean isAdvancedFilter) {
+        pref.edit().putBoolean(Db.IS_ADVANCED_FILTER, isAdvancedFilter).apply();
+    }
+    @Override
+    public void setBlockAdvancedFilter(String prefix, String suffix, String ending, HashSet<String> labels) {
+        pref.edit().putString(Db.PREFIX, prefix)
                 .putString(Db.SUFFIX, suffix)
                 .putString(Db.ENDING, ending)
-                .putStringSet(Db.PREFIX, labels)
+                .putStringSet(Db.LABELS, labels)
                 .apply();
 
     }
@@ -127,8 +131,10 @@ public class SettingsMng implements ISettingsMng {
     public void setDefaultSettings() {
         // filter config
         setIsAllowNonUniqueCode(false);
-        setIsCheckLength(false, 0, 0, 0);
-        setIsAdvancedFilter(false, "", "", "", new HashSet<>());
+        setIsCheckLength(false);
+        setBlockLength(0, 0, 0);
+        setIsAdvancedFilter(false);
+        setBlockAdvancedFilter("", "", "", new HashSet<String>());
 
         // admin config
         setIsAllowEditCode(false);
@@ -156,7 +162,7 @@ public class SettingsMng implements ISettingsMng {
 
     // getters
     public boolean isAllowNonUniqueCode() {
-        return pref.getBoolean(Db.IS_ALLOW_NON_UNIQUE_CODE, false);
+        return pref.getBoolean(Db.IS_ALLOW_NON_UNIQUE_CODE, true);
     }
     public boolean isCheckLength() {
         return pref.getBoolean(Db.IS_CHECK_LENGTH, false);

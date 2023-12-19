@@ -10,6 +10,8 @@ import java.util.List;
 public class FormatMng implements IFormatMng {
     @Override
     public String getJsonFromOrder(Order order) {
+
+
         return null;
     }
 
@@ -25,6 +27,20 @@ public class FormatMng implements IFormatMng {
 
     @Override
     public String getLongitudeFromLocation(Location location) {
+        return null;
+    }
+
+    @Override
+    public int parseIntFromStringOrDefaultZero(String value) {
+        try {
+            return Integer.parseInt(value);
+        } catch (NumberFormatException e) {
+            return 0;
+        }
+    }
+
+    @Override
+    public String getCurrentTimeLikeString() {
         return null;
     }
 }

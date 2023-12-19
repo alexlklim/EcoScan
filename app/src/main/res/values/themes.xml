@@ -23,6 +23,18 @@
         <!-- Add other button-related attributes here if needed -->
     </style>
 
+    <style name="simpleText" parent="Widget.Material3.Button">
+        <item name="android:height">60dp</item>
+        <item name="android:textSize">17sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+    <style name="simpleEditText" parent="Widget.Material3.Button">
+        <item name="android:height">60dp</item>
+        <item name="android:textSize">17sp</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:ems">10</item>
+        <item name="android:inputType">number</item>
+    </style>
 
     <style name="Theme.EcoScan" parent="Base.Theme.EcoScan" />
 </resources>

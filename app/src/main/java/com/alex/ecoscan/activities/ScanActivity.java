@@ -20,7 +20,6 @@ import android.widget.TextView;
 import com.alex.ecoscan.R;
 import com.alex.ecoscan.adapters.CodeAdapter;
 import com.alex.ecoscan.database.RoomDB;
-import com.alex.ecoscan.managers.DialogMng;
 import com.alex.ecoscan.managers.SettingsMng;
 import com.alex.ecoscan.managers.Tost;
 import com.alex.ecoscan.model.Code;
@@ -65,7 +64,7 @@ public class ScanActivity extends AppCompatActivity implements CodeAdapter.OnIte
 
         setOrderNum();
         initializeRecyclerView();
-        listenerCompleteOrder();
+//        listenerCompleteOrder();
 
 
     }
@@ -94,12 +93,12 @@ public class ScanActivity extends AppCompatActivity implements CodeAdapter.OnIte
         super.onDestroy();
         unregisterReceiver(myBroadcastReceiver);
     }
-    private void listenerCompleteOrder() {
-        Log.i(TAG, "addListenerForFinish: ");
-        Button btnComplete = findViewById(R.id.sc_btn_complete);
-        btnComplete.setOnClickListener(v ->
-                DialogMng.confirmCompleteScan(this, getApplicationContext(), roomDB, orderNumber, codeList));
-    }
+//    private void listenerCompleteOrder() {
+//        Log.i(TAG, "addListenerForFinish: ");
+//        Button btnComplete = findViewById(R.id.sc_btn_complete);
+//        btnComplete.setOnClickListener(v ->
+//                DialogMng.confirmCompleteScan(this, getApplicationContext(), roomDB, orderNumber, codeList));
+//    }
 
     private void initializeRecyclerView() {
         recyclerView = findViewById(R.id.sc_rv_codes);
