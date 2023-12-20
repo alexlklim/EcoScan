@@ -36,34 +36,13 @@ import java.util.HashSet;
 import java.util.List;
 
 public class SettingsActivity extends AppCompatActivity
-        implements
-        DialogLength.DialogLengthListener,
-        DialogAdvancedFilter.DialogAdvancedFilterListener
-{
-    CheckBox set_isAllowNonUniqueCode, set_isCheckLength, set_isAdvancedFilter;
-    LinearLayout ll_isAllowNonUniqueCode, ll_isCheckLength, ll_isAdvancedFilter;
-
-
-    CheckBox set_isAllowEditCode, set_isAllowEditOrder, set_isAddGPS, set_isEnableLogging;
-    LinearLayout ll_isAllowEditCode, ll_isAllowEditOrders, ll_isAddGPS, ll_isEnableLogging;
-
-
-    CheckBox set_isSendData, set_isAutoSynch;
-    LinearLayout ll_isSentData, ll_isAutoSynch, ll_configureServer;
-    TextView set_configureServer;
-
-
-    LinearLayout ll_identifier, ll_lang;
+        implements DialogLength.DialogLengthListener, DialogAdvancedFilter.DialogAdvancedFilterListener {
+    CheckBox set_isAllowNonUniqueCode, set_isCheckLength, set_isAdvancedFilter, set_isAllowEditCode, set_isAllowEditOrder, set_isAddGPS, set_isEnableLogging, set_isSendData, set_isAutoSynch, set_isHideSynchData;
+    LinearLayout ll_isAllowEditCode, ll_isAllowEditOrders, ll_isAddGPS, ll_isEnableLogging, ll_isSentData, ll_isAutoSynch, ll_configureServer, ll_identifier, ll_lang, ll_isHideSynchData, ll_isAllowNonUniqueCode, ll_isCheckLength, ll_isAdvancedFilter;
     Spinner set_lang;
     EditText set_identifier;
     ImageView set_btn_saveClientConfig;
-
-
-    LinearLayout ll_isHideSynchData;
-    CheckBox set_isHideSynchData;
-    TextView set_sendAllData, set_deleteSynchData, set_clearAllData;
-
-    TextView set_getSettingsFromServer, set_changeLogin, set_changePw, set_resetSettings;
+    TextView set_configureServer, set_sendAllData, set_deleteSynchData, set_clearAllData, set_getSettingsFromServer, set_changeLogin, set_changePw, set_resetSettings;
 
     private SettingsMng settingsMng;
     @Override
@@ -77,69 +56,7 @@ public class SettingsActivity extends AppCompatActivity
         initializeServerConfig();
         initializeClientConfig();
         initializeDataManagementConfig();
-
         initializeButtons();
-
-    }
-
-    private void initializeButtons() {
-        set_getSettingsFromServer = findViewById(R.id.set_getSettingsFromServer);
-        set_changeLogin = findViewById(R.id.set_changeLogin);
-        set_changePw = findViewById(R.id.set_changePw);
-        set_resetSettings = findViewById(R.id.set_resetSettings);
-
-        set_getSettingsFromServer.setOnClickListener(v -> {
-            changeColorForButton(set_getSettingsFromServer);
-            openDialogGetSettingsFromServer();
-        });
-
-        set_changeLogin.setOnClickListener(v -> {
-            changeColorForButton(set_changeLogin);
-            openDialogChangeLogin();
-        });
-
-        set_changePw.setOnClickListener(v -> {
-            changeColorForButton(set_changePw);
-            openDialogChangePassword();
-        });
-
-        set_resetSettings.setOnClickListener(v -> {
-            changeColorForButton(set_resetSettings);
-            openDialogResetSettings();
-        });
-
-
-
-    }
-
-    private void initializeDataManagementConfig() {
-        set_isHideSynchData = findViewById(R.id.set_isHideSynchData);
-        set_sendAllData = findViewById(R.id.set_sendAllData);
-        set_deleteSynchData = findViewById(R.id.set_deleteSynchData);
-        set_clearAllData = findViewById(R.id.set_clearAllData);
-        ll_isHideSynchData = findViewById(R.id.ll_isHideSynchData);
-
-        set_isHideSynchData.setChecked(settingsMng.isHideSynchData());
-
-        ll_isHideSynchData.setOnClickListener(v -> changeColor(ll_isHideSynchData));
-        set_isHideSynchData.setOnCheckedChangeListener((btnView, isChecked) -> {
-            changeColor(ll_isHideSynchData);
-            settingsMng.setIsHideSynchData(isChecked);
-        });
-
-        set_sendAllData.setOnClickListener(v -> {
-            changeColorForButton(set_sendAllData);
-            openDialogConfirmSentAllDataToServer();
-        });
-        set_deleteSynchData.setOnClickListener(v -> {
-            changeColorForButton(set_deleteSynchData);
-            openDialogConfirmDeleteSynchData();
-        });
-
-        set_clearAllData.setOnClickListener(v -> {
-            changeColorForButton(set_clearAllData);
-            openDialogConfirmDeleteAllData();
-        });
 
     }
 
@@ -297,8 +214,65 @@ public class SettingsActivity extends AppCompatActivity
 
 
     }
+    private void initializeDataManagementConfig() {
+        set_isHideSynchData = findViewById(R.id.set_isHideSynchData);
+        set_sendAllData = findViewById(R.id.set_sendAllData);
+        set_deleteSynchData = findViewById(R.id.set_deleteSynchData);
+        set_clearAllData = findViewById(R.id.set_clearAllData);
+        ll_isHideSynchData = findViewById(R.id.ll_isHideSynchData);
+
+        set_isHideSynchData.setChecked(settingsMng.isHideSynchData());
+
+        ll_isHideSynchData.setOnClickListener(v -> changeColor(ll_isHideSynchData));
+        set_isHideSynchData.setOnCheckedChangeListener((btnView, isChecked) -> {
+            changeColor(ll_isHideSynchData);
+            settingsMng.setIsHideSynchData(isChecked);
+        });
+
+        set_sendAllData.setOnClickListener(v -> {
+            changeColorForButton(set_sendAllData);
+            openDialogConfirmSentAllDataToServer();
+        });
+        set_deleteSynchData.setOnClickListener(v -> {
+            changeColorForButton(set_deleteSynchData);
+            openDialogConfirmDeleteSynchData();
+        });
+
+        set_clearAllData.setOnClickListener(v -> {
+            changeColorForButton(set_clearAllData);
+            openDialogConfirmDeleteAllData();
+        });
+
+    }
+    private void initializeButtons() {
+        set_getSettingsFromServer = findViewById(R.id.set_getSettingsFromServer);
+        set_changeLogin = findViewById(R.id.set_changeLogin);
+        set_changePw = findViewById(R.id.set_changePw);
+        set_resetSettings = findViewById(R.id.set_resetSettings);
+
+        set_getSettingsFromServer.setOnClickListener(v -> {
+            changeColorForButton(set_getSettingsFromServer);
+            openDialogGetSettingsFromServer();
+        });
+
+        set_changeLogin.setOnClickListener(v -> {
+            changeColorForButton(set_changeLogin);
+            openDialogChangeLogin();
+        });
+
+        set_changePw.setOnClickListener(v -> {
+            changeColorForButton(set_changePw);
+            openDialogChangePassword();
+        });
+
+        set_resetSettings.setOnClickListener(v -> {
+            changeColorForButton(set_resetSettings);
+            openDialogResetSettings();
+        });
 
 
+
+    }
 
     // for opening dialogs
     public void openDialogLength(){
@@ -388,17 +362,6 @@ public class SettingsActivity extends AppCompatActivity
         }, 600);
     }
 
-    private void changeColor(TextView layout) {
-        layout.setBackgroundColor(Color.LTGRAY);
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                int color = ContextCompat.getColor(getApplicationContext(), R.color.elements);
-                layout.setBackgroundColor(color);
-            }
-        }, 300);
-    }
     private void changeColorForButton(TextView layout) {
         layout.setBackgroundColor(Color.LTGRAY);
         Handler handler = new Handler();
