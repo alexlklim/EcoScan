@@ -23,8 +23,10 @@ public interface ISettingsMng {
     void setIsSendData(boolean isSendData);
     void setIsAutoSynch(boolean isAutoSynch);
     void setServerAddress(String serverAddress);
+    void setIsServerConfigured(boolean isServerConfigured);
 
-    void setClientConfig(int identifier, String lang);
+
+    void setLang( String lang);
     void setIdentifier(int identifier);
     void setNewLogin(String login);
     void setNewPw(String pw);

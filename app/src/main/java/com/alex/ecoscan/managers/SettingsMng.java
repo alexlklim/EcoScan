@@ -94,12 +94,15 @@ public class SettingsMng implements ISettingsMng {
         pref.edit().putString(Db.SERVER_ADDRESS, serverAddress).apply();
 
     }
+    @Override
+    public void setIsServerConfigured(boolean isServerConfigured) {
+        pref.edit().putBoolean(Db.IS_SERVER_CONFIGURED, isServerConfigured).apply();
+
+    }
 
     @Override
-    public void setClientConfig(int identifier, String lang) {
-        pref.edit().putInt(Db.IDENTIFIER, identifier)
-                .putString(Db.LANG, lang)
-                .apply();
+    public void setLang(String lang) {
+        pref.edit().putString(Db.LANG, lang).apply();
     }
     @Override
     public void setIdentifier(int identifier) {
@@ -148,7 +151,8 @@ public class SettingsMng implements ISettingsMng {
         setServerAddress(Util.URL);
 
         // client config
-        setClientConfig(RandomMng.getRandomIdentifier(), Lang.EN.getCode());
+        setLang(Lang.EN.getCode());
+        setIdentifier(RandomMng.getRandomIdentifier());
         setNewLogin("admin");
         setNewPw("admin");
 

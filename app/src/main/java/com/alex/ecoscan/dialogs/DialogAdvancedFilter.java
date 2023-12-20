@@ -45,7 +45,6 @@ public class DialogAdvancedFilter extends AppCompatDialogFragment {
         LayoutInflater inflater = requireActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.dialog_advanced_filter, null);
         builder.setView(view).setTitle("Advanced Filter");
-        FormatMng formatMng = new FormatMng();
         settingsMng = new SettingsMng(requireContext());
         labelFilterList = new ArrayList<>(settingsMng.getLabels());
         set_labelList = view.findViewById(R.id.set_labelList);

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:padding="20dp"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            style="@style/simpleText"
+            android:text="Server address" />
+
+
+        <EditText
+            android:id="@+id/set_serverAddress"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:ems="10"
+            android:hint="https://..."
+            android:inputType="text"
+            android:text="" />
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:layout_height="match_parent" >
+        <ImageView
+            android:id="@+id/set_connectionResultImage"
+            android:src="@drawable/ic_fail"
+            android:layout_width="40dp"
+            android:visibility="visible"
+            android:layout_height="40dp"/>
+        <TextView
+            android:id="@+id/set_connectionResultText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            style="@style/simpleText"
+            android:text="Result connection" />
+    </LinearLayout>
+    <Button
+        android:id="@+id/set_btn_checkConnection"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_margin="20dp"
+        android:minWidth="150dp"
+        android:text="Check connection"
+        style="@style/btnSettings"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

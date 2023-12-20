@@ -58,6 +58,9 @@
     <string name="are_you_sure">Are you sure?</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    <string name="server_was_configured">Server was configured successfully</string>
+    <string name="something_wrong_with_server">Something wrong with server</string>
+    <string name="something_wrong">Something wrong</string>
 
 
 

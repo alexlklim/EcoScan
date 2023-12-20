@@ -53,7 +53,8 @@ public class MainActivity extends AppCompatActivity {
             } else {
                 // else -> SettingsActivity
                 startActivity(new Intent(MainActivity.this, SettingsActivity.class));
-            }});
+            }
+        });
 
 
         System.out.println("!!!!!!!!!!!!!!!!!!!!!");
