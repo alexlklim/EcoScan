@@ -17,7 +17,9 @@ import androidx.core.content.ContextCompat;
 
 import com.alex.ecoscan.R;
 import com.alex.ecoscan.dialogs.DialogAdvancedFilter;
+import com.alex.ecoscan.dialogs.DialogConfirmDelSynchData;
 import com.alex.ecoscan.dialogs.DialogConfirmSentAllData;
+import com.alex.ecoscan.dialogs.DialogDelAllData;
 import com.alex.ecoscan.dialogs.DialogLength;
 import com.alex.ecoscan.dialogs.DialogServerConfig;
 import com.alex.ecoscan.managers.FormatMng;
@@ -32,8 +34,7 @@ import java.util.List;
 public class SettingsActivity extends AppCompatActivity
         implements
         DialogLength.DialogLengthListener,
-        DialogAdvancedFilter.DialogAdvancedFilterListener,
-        DialogConfirmSentAllData.DialogConfirmListener
+        DialogAdvancedFilter.DialogAdvancedFilterListener
 {
     CheckBox set_isAllowNonUniqueCode, set_isCheckLength, set_isAdvancedFilter;
     LinearLayout ll_isAllowNonUniqueCode, ll_isCheckLength, ll_isAdvancedFilter;
@@ -94,12 +95,12 @@ public class SettingsActivity extends AppCompatActivity
         });
         set_deleteSynchData.setOnClickListener(v -> {
             changeColorForButton(set_deleteSynchData);
-            openDialogConfirmSentAllDataToServer();
+            openDialogConfirmDeleteSynchData();
         });
 
         set_clearAllData.setOnClickListener(v -> {
             changeColorForButton(set_clearAllData);
-            openDialogConfirmSentAllDataToServer();
+            openDialogConfirmDeleteAllData();
         });
 
     }
@@ -281,6 +282,16 @@ public class SettingsActivity extends AppCompatActivity
         DialogConfirmSentAllData dialog = new DialogConfirmSentAllData();
         dialog.show(getSupportFragmentManager(), "Confirm to sent all data to server dialog");
     }
+    private void openDialogConfirmDeleteSynchData() {
+        Log.i("TAG", "openDialogServerConfig: ");
+        DialogConfirmDelSynchData dialog = new DialogConfirmDelSynchData();
+        dialog.show(getSupportFragmentManager(), "Confirm to to delete synch data");
+    }
+    private void openDialogConfirmDeleteAllData() {
+        Log.i("TAG", "openDialogServerConfig: ");
+        DialogDelAllData dialog = new DialogDelAllData();
+        dialog.show(getSupportFragmentManager(), "Confirm to to delete all data");
+    }
 
 
 
@@ -336,8 +347,4 @@ public class SettingsActivity extends AppCompatActivity
         }, 300);
     }
 
-    @Override
-    public void returnAnswer(boolean answer) {
-
-    }
 }
