@@ -1,4 +1,4 @@
-package com.alex.ecoscan.dialogs;
+package com.alex.ecoscan.dialogs.datamanagement;
 
 import android.app.Dialog;
 import android.os.Bundle;

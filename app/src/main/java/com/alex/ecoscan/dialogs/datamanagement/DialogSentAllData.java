@@ -1,7 +1,6 @@
-package com.alex.ecoscan.dialogs;
+package com.alex.ecoscan.dialogs.datamanagement;
 
 import android.app.Dialog;
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,8 +15,7 @@ import com.alex.ecoscan.R;
 import com.alex.ecoscan.managers.FormatMng;
 import com.alex.ecoscan.managers.SettingsMng;
 
-public class DialogConfirmDelSynchData extends AppCompatDialogFragment {
-
+public class DialogSentAllData extends AppCompatDialogFragment {
     SettingsMng settingsMng;
     @NonNull
     @Override
@@ -25,7 +23,8 @@ public class DialogConfirmDelSynchData extends AppCompatDialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(requireActivity());
         LayoutInflater inflater = requireActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.dialog_confirm, null);
-        builder.setView(view).setTitle("Delete all synch data");
+        FormatMng formatMng = new FormatMng();
+        builder.setView(view).setTitle("Sent all data to server");
         settingsMng = new SettingsMng(requireContext());
 
         Button btn_yes = view.findViewById(R.id.btn_yes);
@@ -41,6 +40,8 @@ public class DialogConfirmDelSynchData extends AppCompatDialogFragment {
             dismiss();
         });
 
+
         return builder.create();
     }
+
 }

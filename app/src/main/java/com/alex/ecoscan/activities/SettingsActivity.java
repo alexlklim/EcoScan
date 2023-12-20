@@ -17,11 +17,15 @@ import androidx.core.content.ContextCompat;
 
 import com.alex.ecoscan.R;
 import com.alex.ecoscan.dialogs.DialogAdvancedFilter;
-import com.alex.ecoscan.dialogs.DialogConfirmDelSynchData;
-import com.alex.ecoscan.dialogs.DialogConfirmSentAllData;
-import com.alex.ecoscan.dialogs.DialogDelAllData;
+import com.alex.ecoscan.dialogs.datamanagement.DialogConfirmDelSynchData;
+import com.alex.ecoscan.dialogs.datamanagement.DialogSentAllData;
+import com.alex.ecoscan.dialogs.datamanagement.DialogDelAllData;
 import com.alex.ecoscan.dialogs.DialogLength;
 import com.alex.ecoscan.dialogs.DialogServerConfig;
+import com.alex.ecoscan.dialogs.settings.DialogChangeLogin;
+import com.alex.ecoscan.dialogs.settings.DialogChangePw;
+import com.alex.ecoscan.dialogs.settings.DialogGetSettingsFromServer;
+import com.alex.ecoscan.dialogs.settings.DialogResetSettings;
 import com.alex.ecoscan.managers.FormatMng;
 import com.alex.ecoscan.managers.SettingsMng;
 import com.alex.ecoscan.managers.Tost;
@@ -59,6 +63,8 @@ public class SettingsActivity extends AppCompatActivity
     CheckBox set_isHideSynchData;
     TextView set_sendAllData, set_deleteSynchData, set_clearAllData;
 
+    TextView set_getSettingsFromServer, set_changeLogin, set_changePw, set_resetSettings;
+
     private SettingsMng settingsMng;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +77,38 @@ public class SettingsActivity extends AppCompatActivity
         initializeServerConfig();
         initializeClientConfig();
         initializeDataManagementConfig();
+
+        initializeButtons();
+
+    }
+
+    private void initializeButtons() {
+        set_getSettingsFromServer = findViewById(R.id.set_getSettingsFromServer);
+        set_changeLogin = findViewById(R.id.set_changeLogin);
+        set_changePw = findViewById(R.id.set_changePw);
+        set_resetSettings = findViewById(R.id.set_resetSettings);
+
+        set_getSettingsFromServer.setOnClickListener(v -> {
+            changeColorForButton(set_getSettingsFromServer);
+            openDialogGetSettingsFromServer();
+        });
+
+        set_changeLogin.setOnClickListener(v -> {
+            changeColorForButton(set_changeLogin);
+            openDialogChangeLogin();
+        });
+
+        set_changePw.setOnClickListener(v -> {
+            changeColorForButton(set_changePw);
+            openDialogChangePassword();
+        });
+
+        set_resetSettings.setOnClickListener(v -> {
+            changeColorForButton(set_resetSettings);
+            openDialogResetSettings();
+        });
+
+
 
     }
 
@@ -279,7 +317,7 @@ public class SettingsActivity extends AppCompatActivity
     }
     private void openDialogConfirmSentAllDataToServer() {
         Log.i("TAG", "openDialogServerConfig: ");
-        DialogConfirmSentAllData dialog = new DialogConfirmSentAllData();
+        DialogSentAllData dialog = new DialogSentAllData();
         dialog.show(getSupportFragmentManager(), "Confirm to sent all data to server dialog");
     }
     private void openDialogConfirmDeleteSynchData() {
@@ -292,6 +330,32 @@ public class SettingsActivity extends AppCompatActivity
         DialogDelAllData dialog = new DialogDelAllData();
         dialog.show(getSupportFragmentManager(), "Confirm to to delete all data");
     }
+
+    private void openDialogGetSettingsFromServer() {
+        Log.i("TAG", "openDialogServerConfig: ");
+        DialogGetSettingsFromServer dialog = new DialogGetSettingsFromServer();
+        dialog.show(getSupportFragmentManager(), "Get settings from server");
+    }
+
+    private void openDialogChangeLogin() {
+        Log.i("TAG", "openDialogServerConfig: ");
+        DialogChangeLogin dialog = new DialogChangeLogin();
+        dialog.show(getSupportFragmentManager(), "Change login");
+    }
+
+    private void openDialogChangePassword() {
+        Log.i("TAG", "openDialogServerConfig: ");
+        DialogChangePw dialog = new DialogChangePw();
+        dialog.show(getSupportFragmentManager(), "Change password");
+    }
+
+    private void openDialogResetSettings() {
+        Log.i("TAG", "openDialogServerConfig: ");
+        DialogResetSettings dialog = new DialogResetSettings();
+        dialog.show(getSupportFragmentManager(), "Reset Settings");
+    }
+
+
 
 
 

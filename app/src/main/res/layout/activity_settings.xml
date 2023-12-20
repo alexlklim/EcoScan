@@ -501,6 +501,7 @@
 
 
         <LinearLayout
+            android:id="@+id/ll_getSetFromServer"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginLeft="10dp"
@@ -520,6 +521,7 @@
 
         </LinearLayout>
         <LinearLayout
+            android:id="@+id/ll_changeLogin"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginLeft="10dp"
@@ -539,6 +541,7 @@
 
         </LinearLayout>
         <LinearLayout
+            android:id="@+id/ll_changePw"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginLeft="10dp"
@@ -558,6 +561,7 @@
 
         </LinearLayout>
         <LinearLayout
+            android:id="@+id/ll_resetSettings"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginLeft="10dp"
