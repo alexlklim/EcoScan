@@ -10,6 +10,8 @@ import android.widget.ImageButton;
 import com.alex.ecoscan.activities.LoginActivity;
 import com.alex.ecoscan.activities.OrdersActivity;
 import com.alex.ecoscan.activities.SettingsActivity;
+import com.alex.ecoscan.dialogs.DialogCreateNewOrder;
+import com.alex.ecoscan.dialogs.settings.DialogResetSettings;
 import com.alex.ecoscan.managers.NetworkMng;
 import com.alex.ecoscan.managers.RandomMng;
 import com.alex.ecoscan.managers.SettingsMng;
@@ -42,7 +44,8 @@ public class MainActivity extends AppCompatActivity {
 
 
         btnGoScan.setOnClickListener(view -> {
-//            DialogMng.inputOrderNum(this, getApplicationContext());
+            DialogCreateNewOrder dialog = new DialogCreateNewOrder();
+            dialog.show(getSupportFragmentManager(), "Create new order");
         });
         btnGoOrders.setOnClickListener(view ->
                 startActivity(new Intent(MainActivity.this, OrdersActivity.class)));
@@ -56,9 +59,5 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
-        System.out.println("!!!!!!!!!!!!!!!!!!!!!");
-        NetworkMng networkMng = new NetworkMng();
-        System.out.println(networkMng.isServerAvailable());
     }
 }
