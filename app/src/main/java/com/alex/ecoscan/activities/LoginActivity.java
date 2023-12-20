@@ -7,6 +7,7 @@ import android.os.Bundle;
 import com.alex.ecoscan.R;
 
 public class LoginActivity extends AppCompatActivity {
+    private static final String TAG = "LoginActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

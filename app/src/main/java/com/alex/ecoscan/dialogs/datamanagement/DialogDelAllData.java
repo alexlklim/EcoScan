@@ -16,6 +16,8 @@ import com.alex.ecoscan.managers.FormatMng;
 import com.alex.ecoscan.managers.SettingsMng;
 
 public class DialogDelAllData extends AppCompatDialogFragment {
+    private static final String TAG = "DialogDelAllData";
+
     SettingsMng settingsMng;
     @NonNull
     @Override

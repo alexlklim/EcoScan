@@ -19,6 +19,7 @@ import com.alex.ecoscan.managers.SettingsMng;
 import com.alex.ecoscan.managers.Tost;
 
 public class DialogChangePw extends AppCompatDialogFragment {
+    private static final String TAG = "DialogChangePw";
 
     SettingsMng settingsMng;
     @NonNull

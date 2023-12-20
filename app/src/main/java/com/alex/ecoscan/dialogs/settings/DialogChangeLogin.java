@@ -19,6 +19,7 @@ import com.alex.ecoscan.managers.SettingsMng;
 import com.alex.ecoscan.managers.Tost;
 
 public class DialogChangeLogin extends AppCompatDialogFragment {
+    private static final String TAG = "DialogChangeLogin";
 
     SettingsMng settingsMng;
     @NonNull

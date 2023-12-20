@@ -3,12 +3,10 @@ package com.alex.ecoscan.dialogs;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,11 +16,11 @@ import androidx.appcompat.app.AppCompatDialogFragment;
 import com.alex.ecoscan.R;
 import com.alex.ecoscan.activities.ScanActivity;
 import com.alex.ecoscan.database.RoomDB;
-import com.alex.ecoscan.managers.FormatMng;
-import com.alex.ecoscan.managers.SettingsMng;
 import com.alex.ecoscan.managers.Tost;
 
 public class DialogCreateNewOrder extends AppCompatDialogFragment {
+    private static final String TAG = "DialogCreateNewOrder";
+
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {

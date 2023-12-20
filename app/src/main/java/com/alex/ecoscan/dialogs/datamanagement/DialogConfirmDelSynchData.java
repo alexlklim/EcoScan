@@ -1,7 +1,6 @@
 package com.alex.ecoscan.dialogs.datamanagement;
 
 import android.app.Dialog;
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,10 +12,11 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
 import com.alex.ecoscan.R;
-import com.alex.ecoscan.managers.FormatMng;
 import com.alex.ecoscan.managers.SettingsMng;
 
 public class DialogConfirmDelSynchData extends AppCompatDialogFragment {
+    private static final String TAG = "DialogConfirmDelSynchData";
+
 
     SettingsMng settingsMng;
     @NonNull

@@ -7,6 +7,8 @@ import com.alex.ecoscan.model.Order;
 import java.util.List;
 
 public class DatabaseMng {
+    private static final String TAG = "DatabaseMng";
+
 
     public static boolean saveNewOrder(RoomDB roomDB, String orderNum, List<Code> codeList){
         // save new order in DB

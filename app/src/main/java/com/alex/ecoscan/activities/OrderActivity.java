@@ -7,6 +7,7 @@ import android.os.Bundle;
 import com.alex.ecoscan.R;
 
 public class OrderActivity extends AppCompatActivity {
+    private static final String TAG = "OrderActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

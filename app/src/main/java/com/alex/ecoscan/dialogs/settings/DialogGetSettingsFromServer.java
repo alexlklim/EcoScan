@@ -20,6 +20,7 @@ import com.alex.ecoscan.managers.FormatMng;
 import com.alex.ecoscan.managers.SettingsMng;
 
 public class DialogGetSettingsFromServer extends AppCompatDialogFragment {
+    private static final String TAG = "DialogGetSettingsFromServer";
 
     SettingsMng settingsMng;
     Button set_btn_checkConnection;

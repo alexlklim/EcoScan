@@ -7,6 +7,8 @@ import java.util.List;
 
 
 public class SynchMan implements ISynchMng {
+    private static final String TAG = "SynchMan";
+
 
     @Override
     public void synchOrder(Order order) {

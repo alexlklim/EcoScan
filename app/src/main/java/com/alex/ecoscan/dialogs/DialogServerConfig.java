@@ -19,6 +19,8 @@ import com.alex.ecoscan.R;
 import com.alex.ecoscan.managers.SettingsMng;
 
 public class DialogServerConfig extends AppCompatDialogFragment {
+    private static final String TAG = "DialogServerConfig";
+
     SettingsMng settingsMng;
     Button set_btn_checkConnection;
     EditText set_serverAddress;

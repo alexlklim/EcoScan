@@ -30,6 +30,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class DialogAdvancedFilter extends AppCompatDialogFragment {
+    private static final String TAG = "DialogAdvancedFilter";
+
     SettingsMng settingsMng;
     private EditText set_prefix, set_suffix, set_ending;
     TextView set_labelList;
