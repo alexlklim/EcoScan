@@ -47,7 +47,7 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.OrderViewH
 
         // Bind order data to views in the ViewHolder
         holder.title.setText(order.getOrderNum());
-        holder.date.setText(DateMng.extractHoursAndMinutes(order.getDate()));
+        holder.date.setText(DateMng.extractShortDate(order.getDate()));
         holder.amount.setText(String.valueOf(roomDB.codeDAO().getCodeCountForOrder(order.getID())));
 
         // Set the ImageView based on the isSynch value

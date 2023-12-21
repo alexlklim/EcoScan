@@ -36,28 +36,26 @@ public class OrdersActivity extends AppCompatActivity implements OrdersAdapter.O
         roomDB = RoomDB.getInstance(this);
         context = getApplicationContext();
         settingsMng = new SettingsMng(this);
-//        synchMan = new SynchMan(this);
 
         initializeRecyclerView();
-        initializeMenu();
-    }
 
-    private void initializeMenu() {
+
         ImageView menu = findViewById(R.id.os_menu);
         menu.setOnClickListener(v -> showPopupMenu(menu));
 
+
     }
+
 
     @Override
     protected void onResume() {
         super.onResume();
+        orderAdapter.notifyDataSetChanged();
         initializeRecyclerView();
-        // This is called when the activity is about to be displayed
+
     }
 
     private void initializeRecyclerView() {
-        Log.i(TAG, "initializeRecyclerView: ");
-        // create recyclerView and set adapter
         recyclerView = findViewById(R.id.os_rv_orders);
         orderAdapter = new OrdersAdapter(roomDB.orderDAO().getAll(), this, roomDB);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
@@ -70,10 +68,8 @@ public class OrdersActivity extends AppCompatActivity implements OrdersAdapter.O
 
     @Override
     public void onItemClick(int orderId) {
-        // make possible to click on special order
-        Log.i(TAG, "onItemClick: " + orderId);
         Intent intent = new Intent(this, OrderActivity.class);
-        intent.putExtra("orderId", orderId);
+        intent.putExtra("ORDER_ID", orderId);
         startActivity(intent);
     }
 

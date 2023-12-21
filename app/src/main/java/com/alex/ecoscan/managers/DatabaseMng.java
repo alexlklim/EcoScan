@@ -24,4 +24,10 @@ public class DatabaseMng {
         return true;
     }
 
+    public static void deleteOrder(RoomDB roomDB, Order order, List<Code> codeList) {
+        roomDB.orderDAO().delete(order);
+        for (Code code: codeList){
+            roomDB.codeDAO().delete(code);
+        }
+    }
 }

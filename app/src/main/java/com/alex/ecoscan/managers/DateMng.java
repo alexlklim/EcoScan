@@ -18,8 +18,10 @@ public class DateMng{
     }
 
 
-    public static String extractHoursAndMinutes(String dateTime) {
+    public static String extractShortDate(String dateTime) {
         SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+        SimpleDateFormat outputFormat = new SimpleDateFormat("d MMM H:mm", Locale.getDefault());
+
         Date date;
         try {
             date = inputFormat.parse(dateTime);
@@ -29,8 +31,23 @@ public class DateMng{
         }
 
         // Format the Date object to the desired output format
-        SimpleDateFormat outputFormat = new SimpleDateFormat("d MMM H:mm", Locale.getDefault());
         String outputDateString = outputFormat.format(date);;
         return outputDateString;
+    }
+
+    public static String extractHoursAndMinutes(String dateTime) {
+        SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat outputFormat = new SimpleDateFormat("HH:mm");
+
+        Date date = null;
+        try {
+            date = inputFormat.parse(dateTime);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return null;
+        }
+        // Format the date as "HH:mm"
+        String formattedTime = outputFormat.format(date);
+        return formattedTime;
     }
 }
