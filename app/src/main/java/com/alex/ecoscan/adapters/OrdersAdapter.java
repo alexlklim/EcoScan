@@ -16,6 +16,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.alex.ecoscan.R;
+import com.alex.ecoscan.database.RoomDB;
+import com.alex.ecoscan.managers.DateMng;
 import com.alex.ecoscan.model.Order;
 
 import java.util.List;
@@ -23,11 +25,13 @@ import java.util.List;
 public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.OrderViewHolder> {
 
     private List<Order> orderList;
+    private RoomDB roomDB;
     private OnItemClickListener onItemClickListener;
     // Constructor to initialize the orderList
-    public OrdersAdapter(List<Order> orderList, OnItemClickListener onItemClickListener) {
+    public OrdersAdapter(List<Order> orderList, OnItemClickListener onItemClickListener, RoomDB roomDB) {
         this.orderList = orderList;
         this.onItemClickListener = onItemClickListener;
+        this.roomDB = roomDB;
     }
 
     @NonNull
@@ -43,7 +47,8 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.OrderViewH
 
         // Bind order data to views in the ViewHolder
         holder.title.setText(order.getOrderNum());
-        holder.date.setText(order.getDate());
+        holder.date.setText(DateMng.extractHoursAndMinutes(order.getDate()));
+        holder.amount.setText(String.valueOf(roomDB.codeDAO().getCodeCountForOrder(order.getID())));
 
         // Set the ImageView based on the isSynch value
         if (order.getIsSynch() == 1) {
@@ -68,13 +73,14 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.OrderViewH
 
     // ViewHolder class
     public static class OrderViewHolder extends RecyclerView.ViewHolder {
-        TextView title, date;
+        TextView title, date, amount;
         ImageView isSynch;
 
         public OrderViewHolder(@NonNull View itemView) {
             super(itemView);
             title = itemView.findViewById(R.id.r_title);
             date = itemView.findViewById(R.id.r_date);
+            amount = itemView.findViewById(R.id.r_amount);
             isSynch = itemView.findViewById(R.id.r_isSynch);
         }
     }
