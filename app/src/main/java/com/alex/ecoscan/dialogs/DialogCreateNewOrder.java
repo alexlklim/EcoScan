@@ -27,16 +27,13 @@ public class DialogCreateNewOrder extends AppCompatDialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(requireActivity());
         LayoutInflater inflater = requireActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.dialog_create_order, null);
-
         builder.setView(view).setTitle("Create new order");
-
 
         EditText d_orderNum = view.findViewById(R.id.d_orderNum);
         Button btnConfirm = view.findViewById(R.id.d_btn_confirm);
 
         btnConfirm.setOnClickListener(v -> {
 
-            // check if this orderNum is unique in DB
             String orderNum = d_orderNum.getText().toString();
 
             if (orderNum.isEmpty()) {
@@ -50,10 +47,7 @@ public class DialogCreateNewOrder extends AppCompatDialogFragment {
                 intent.putExtra("ORDER_NUMBER", orderNum);
                 startActivity(intent);
             }
-            Tost.show("Something wrong", requireContext());
         });
-
-
 
         return builder.create();
     }

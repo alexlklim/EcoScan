@@ -34,8 +34,8 @@ public class CodeAdapter extends RecyclerView.Adapter<CodeAdapter.CodeViewHolder
     public void onBindViewHolder(@NonNull CodeViewHolder holder, int position) {
         Code code = codeList.get(position);
         // set values to rv
-        holder.code.setText(R.string.code_rv + code.getCode());
-        holder.label.setText(R.string.label_rv + code.getLabel());
+        holder.code.setText("Code: " + code.getCode());
+        holder.label.setText("Label: " + code.getLabel());
     }
 
     @Override

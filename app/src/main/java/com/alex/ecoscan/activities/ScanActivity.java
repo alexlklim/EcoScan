@@ -1,5 +1,6 @@
 package com.alex.ecoscan.activities;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -14,12 +15,17 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.alex.ecoscan.MainActivity;
 import com.alex.ecoscan.R;
 import com.alex.ecoscan.adapters.CodeAdapter;
 import com.alex.ecoscan.database.RoomDB;
+import com.alex.ecoscan.managers.DatabaseMng;
 import com.alex.ecoscan.managers.SettingsMng;
 import com.alex.ecoscan.managers.Tost;
 import com.alex.ecoscan.model.Code;
@@ -62,9 +68,13 @@ public class ScanActivity extends AppCompatActivity implements CodeAdapter.OnIte
         registerReceiver(myBroadcastReceiver, filter);
 
 
-        setOrderNum();
+        TextView orderNum = findViewById(R.id.sc_tv_orderNum);
+        orderNumber = getIntent().getStringExtra("ORDER_NUMBER");
+        orderNum.setText(orderNumber);
+
+
+
         initializeRecyclerView();
-//        listenerCompleteOrder();
 
 
     }
@@ -93,12 +103,8 @@ public class ScanActivity extends AppCompatActivity implements CodeAdapter.OnIte
         super.onDestroy();
         unregisterReceiver(myBroadcastReceiver);
     }
-//    private void listenerCompleteOrder() {
-//        Log.i(TAG, "addListenerForFinish: ");
-//        Button btnComplete = findViewById(R.id.sc_btn_complete);
-//        btnComplete.setOnClickListener(v ->
-//                DialogMng.confirmCompleteScan(this, getApplicationContext(), roomDB, orderNumber, codeList));
-//    }
+
+
 
     private void initializeRecyclerView() {
         recyclerView = findViewById(R.id.sc_rv_codes);
@@ -107,11 +113,6 @@ public class ScanActivity extends AppCompatActivity implements CodeAdapter.OnIte
         recyclerView.setAdapter(codeAdapter);
     }
 
-    private void setOrderNum() {
-        TextView orderNum = findViewById(R.id.sc_tv_orderNum);
-        orderNumber = getIntent().getStringExtra("ORDER_NUM");
-        orderNum.setText(orderNumber);
-    }
 
 
     private final BroadcastReceiver myBroadcastReceiver = new BroadcastReceiver() {
@@ -165,8 +166,8 @@ public class ScanActivity extends AppCompatActivity implements CodeAdapter.OnIte
 
     public Code filteringData(Code code) {
         Log.i(TAG, "filteringData: code");
-        if (settingsMng.isAllowNonUniqueCode() && codeList.stream().anyMatch(c -> c.getCode().equals(code.getCode()))) {
-            Log.d(TAG, "filteringData: CODE NON UNIQUE=");
+        if (!settingsMng.isAllowNonUniqueCode() && codeList.stream().anyMatch(c -> c.getCode().equals(code.getCode()))) {
+            Log.d(TAG, "filteringData: CODE NON UNIQUE");
             return null;
         }
 
@@ -181,12 +182,89 @@ public class ScanActivity extends AppCompatActivity implements CodeAdapter.OnIte
         if (settingsMng.isAdvancedFilter()) {
             Log.d(TAG, "filteringData: isDoAdvancedFilter=" + settingsMng.isAdvancedFilter());
             String cod = code.getCode();
-            if (settingsMng.getPrefix().equals("") && !cod.startsWith(settingsMng.getPrefix())) return null;
-            if (settingsMng.getSuffix().equals("") && !cod.contains(settingsMng.getSuffix())) return null;
-            if (settingsMng.getEnding().equals("") && !cod.endsWith(settingsMng.getEnding())) return null;
-//            if (settingsMng.getLabels().equals("NONE") && !code.getLabel().equals(settingsMng.getLabels())) return null;
+            if (!settingsMng.getPrefix().equals("") && cod.startsWith(settingsMng.getPrefix())) return null;
+            if (!settingsMng.getSuffix().equals("") && cod.contains(settingsMng.getSuffix())) return null;
+            if (!settingsMng.getEnding().equals("") && cod.endsWith(settingsMng.getEnding())) return null;
+
+            if (!settingsMng.getLabels().isEmpty()){
+                if (!settingsMng.getLabels().contains(code.getLabel())) return null;
+            }
         }
         Log.d(TAG, "filteringData: code passed all filters");
         return code;
     }
+
+
+
+
+
+    AlertDialog alertDialog;
+    public void showDialogConfirmFinishOrder(View view) {
+        Log.i(TAG, "showDialogConfirmationFinishOrder: ");
+        LayoutInflater inflater = getLayoutInflater();
+        View dialog = inflater.inflate(R.layout.dialog_confirm, null);
+
+        Button btn_yes = dialog.findViewById(R.id.btn_yes);
+        Button btn_no = dialog.findViewById(R.id.btn_no);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setView(dialog);
+
+        btn_yes.setOnClickListener(v -> {
+            if (codeList.isEmpty()){
+               Tost.show("Order is empty", this);
+
+            } else {
+                boolean result = DatabaseMng.saveNewOrder(roomDB, orderNumber, codeList);
+                System.out.println(result);
+                if (result) Tost.show("Order was saved", this);
+                alertDialog.dismiss();
+                showDialogOrderSavedResult(result);
+            }
+        });
+
+        btn_no.setOnClickListener(v -> alertDialog.dismiss());
+        alertDialog = builder.create();
+        alertDialog.show();
+    }
+
+
+    public void showDialogOrderSavedResult(boolean result) {
+        LayoutInflater inflater = getLayoutInflater();
+        View dialog = inflater.inflate(R.layout.dialog_result, null);
+
+        TextView d_resultText = dialog.findViewById(R.id.d_resultText);
+        ImageView d_resultImage = dialog.findViewById(R.id.d_resultImage);
+        Button d_btn_okay = dialog.findViewById(R.id.d_btn_okay);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setView(dialog);
+
+        if (roomDB.orderDAO().isExistByOrderNum(orderNumber) && result){
+            d_resultText.setText("Order was saved successfully");
+            d_resultImage.setImageResource(R.drawable.ic_success);
+            Tost.show("Success", this);
+        } else{
+            d_resultText.setText("Something wrong");
+            d_resultImage.setImageResource(R.drawable.ic_fail);
+            Tost.show("Something wrong", this);
+        }
+
+
+        d_btn_okay.setOnClickListener(v -> {
+            Intent intent  = new Intent(this, MainActivity.class);
+            startActivity(intent);
+            alertDialog.dismiss();
+            finish();
+
+        });
+
+        alertDialog = builder.create();
+        alertDialog.show();
+    }
+
+
+
+
+
 }

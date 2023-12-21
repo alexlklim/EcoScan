@@ -47,7 +47,7 @@ public class Code implements Serializable {
     public Code(String code, String label, String gpsLon, String gpsLat) {
         this.code = code;
         this.time = DateMng.getCurrentTimeLikeString();
-        this.label = label;
+        this.label = label.substring(label.lastIndexOf("-") + 1);
         this.gpsLon = gpsLon;
         this.gpsLat = gpsLat;
     }

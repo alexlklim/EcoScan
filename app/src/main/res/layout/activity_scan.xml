@@ -48,9 +48,10 @@
 
         <Button
             android:id="@+id/sc_btn_complete"
-            android:layout_width="wrap_content"
             style="@style/btnStyle"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:onClick="showDialogConfirmFinishOrder"
             android:text="@string/complete" />
     </LinearLayout>
 
