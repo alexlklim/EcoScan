@@ -6,4 +6,7 @@
     <item
         android:id="@+id/menu_hideOrders"
         android:title="Hide synch orders" />
+    <item
+        android:id="@+id/menu_showOrders"
+        android:title="Show all orders" />
 </menu>
