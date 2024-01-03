@@ -54,6 +54,10 @@ public class OrdersActivity extends AppCompatActivity implements OrdersAdapter.O
 
         initializeRecyclerView();
 
+        if(settingsMng.isHideSynchData()){
+            showNotSynchOrders = true;
+            initializeRecyclerView();
+        }
 
         ImageView menu = findViewById(R.id.os_menu);
         menu.setOnClickListener(v -> showPopupMenu(menu));
