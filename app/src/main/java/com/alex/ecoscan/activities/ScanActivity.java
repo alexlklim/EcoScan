@@ -27,6 +27,7 @@ import com.alex.ecoscan.adapters.CodeAdapter;
 import com.alex.ecoscan.database.RoomDB;
 import com.alex.ecoscan.managers.DatabaseMng;
 import com.alex.ecoscan.managers.SettingsMng;
+import com.alex.ecoscan.managers.SynchMan;
 import com.alex.ecoscan.managers.Tost;
 import com.alex.ecoscan.model.Code;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -46,6 +47,7 @@ public class ScanActivity extends AppCompatActivity implements CodeAdapter.OnIte
     private String orderNum;
     private RecyclerView recyclerView;
     private CodeAdapter codeAdapter;
+    private SynchMan synchMan;
 
     private Context context;
     String orderNumber;
@@ -57,6 +59,7 @@ public class ScanActivity extends AppCompatActivity implements CodeAdapter.OnIte
 
         roomDB = RoomDB.getInstance(context);
         context = getApplicationContext();
+        synchMan = new SynchMan(this);
         settingsMng = new SettingsMng(this);
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
         getLastLocation();
@@ -244,6 +247,8 @@ public class ScanActivity extends AppCompatActivity implements CodeAdapter.OnIte
             d_resultText.setText("Order was saved successfully");
             d_resultImage.setImageResource(R.drawable.ic_success);
             Tost.show("Success", this);
+            autoSynch();
+
         } else{
             d_resultText.setText("Something wrong");
             d_resultImage.setImageResource(R.drawable.ic_fail);
@@ -263,7 +268,22 @@ public class ScanActivity extends AppCompatActivity implements CodeAdapter.OnIte
         alertDialog.show();
     }
 
-
+    private void autoSynch() {
+        if (settingsMng.isServerConfigured() && settingsMng.isAutoSynch() && settingsMng.isSentData()){
+            synchMan = new SynchMan(this);
+            synchMan.synchOrders(roomDB.orderDAO().getNonSynch(), new SynchMan.OnSynchCompleteListener() {
+                @Override
+                public void onSynchComplete(int responseCode) {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            initializeRecyclerView();
+                        }
+                    });
+                }
+            });
+        }
+    }
 
 
 

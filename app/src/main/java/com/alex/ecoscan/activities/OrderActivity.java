@@ -24,6 +24,7 @@ import com.alex.ecoscan.managers.SynchMan;
 import com.alex.ecoscan.model.Code;
 import com.alex.ecoscan.model.Order;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class OrderActivity extends AppCompatActivity implements OrderAdapter.OnItemClickListener {
@@ -42,6 +43,7 @@ public class OrderActivity extends AppCompatActivity implements OrderAdapter.OnI
     OrderAdapter orderAdapter;
 
     AlertDialog alertDialog;
+    SynchMan synchMan;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +52,7 @@ public class OrderActivity extends AppCompatActivity implements OrderAdapter.OnI
 
         settingsMng = new SettingsMng(this);
         roomDB = RoomDB.getInstance(this);
-
+        synchMan = new SynchMan(this);
 
         Intent intent = getIntent();
         orderId = intent.getIntExtra("ORDER_ID", -1);
@@ -61,7 +63,26 @@ public class OrderActivity extends AppCompatActivity implements OrderAdapter.OnI
         initializeTextViews();
         initializeRecyclerView();
 
+        if (settingsMng.isServerConfigured() && settingsMng.isAutoSynch() && settingsMng.isSentData() && order.getIsSynch()== 0){
+            synch();
+        }
+    }
 
+    private void synch() {
+        synchMan = new SynchMan(this);
+        List<Order> list = new ArrayList<>();
+        list.add(roomDB.orderDAO().getOrderByOrderID(orderId));
+        synchMan.synchOrders(list, new SynchMan.OnSynchCompleteListener() {
+            @Override
+            public void onSynchComplete(int responseCode) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        initializeTextViews();
+                    }
+                });
+            }
+        });
     }
 
 
@@ -75,6 +96,9 @@ public class OrderActivity extends AppCompatActivity implements OrderAdapter.OnI
 
         if (order.getIsSynch() == 1) so_iv_synchStatus.setImageResource(R.drawable.ic_synch);
         else so_iv_synchStatus.setImageResource(R.drawable.ic_synch_not);
+        so_iv_synchStatus.setOnClickListener(v ->{
+            synch();
+        });
 
 
     }
@@ -118,12 +142,6 @@ public class OrderActivity extends AppCompatActivity implements OrderAdapter.OnI
         alertDialog = builder.create();
         alertDialog.show();
 
-    }
-
-
-    public void synchOrderWithServer(View view){
-        SynchMan synchMan = new SynchMan(this);
-//        synchMan.synchOrder(order);
     }
 
 

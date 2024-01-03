@@ -58,10 +58,27 @@ public class OrdersActivity extends AppCompatActivity implements OrdersAdapter.O
         ImageView menu = findViewById(R.id.os_menu);
         menu.setOnClickListener(v -> showPopupMenu(menu));
 
+        autoSynch();
+
 
     }
 
-
+    private void autoSynch() {
+        if (settingsMng.isServerConfigured() && settingsMng.isAutoSynch() && settingsMng.isSentData()){
+            synchMan = new SynchMan(this);
+            synchMan.synchOrders(roomDB.orderDAO().getNonSynch(), new SynchMan.OnSynchCompleteListener() {
+                @Override
+                public void onSynchComplete(int responseCode) {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            initializeRecyclerView();
+                        }
+                    });
+                }
+            });
+        }
+    }
 
 
     @Override

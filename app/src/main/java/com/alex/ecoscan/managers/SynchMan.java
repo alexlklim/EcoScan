@@ -3,7 +3,6 @@ package com.alex.ecoscan.managers;
 import android.content.Context;
 
 import com.alex.ecoscan.database.RoomDB;
-import com.alex.ecoscan.interfaces.ISynchMng;
 import com.alex.ecoscan.model.Code;
 import com.alex.ecoscan.model.Order;
 import com.alex.ecoscan.model.OrderWithCodes;
@@ -16,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class SynchMan implements ISynchMng {
+public class SynchMan  {
     private static final String TAG = "SynchMan";
     private static Context context;
     RoomDB roomDB;
@@ -27,20 +26,26 @@ public class SynchMan implements ISynchMng {
         SynchMan.context = context;
     }
 
+    @FunctionalInterface
+    public interface OnSynchCompleteListener {
+        void onSynchComplete(int responseCode);
+    }
 
-    @Override
-    public void synchOrders(List<Order> orders) {
-        if (!checkCommonCases()){
+
+
+    public void synchOrders(List<Order> orders, OnSynchCompleteListener synchCompleteListener) {
+        if (!checkCommonCases()) {
             return;
         }
+
         roomDB = RoomDB.getInstance(context);
 
         List<OrderWithCodes> orderWithCodesList = new ArrayList<>();
         for (Order order : orders) {
             List<Code> codes = roomDB.codeDAO().getAllByOrderID(order.getID());
-            // Populate the list of codes for each order with your data
             orderWithCodesList.add(order.toOrderWithCodes(codes));
         }
+
         Gson gson = new Gson();
         String json = gson.toJson(orderWithCodesList);
 
@@ -50,7 +55,7 @@ public class SynchMan implements ISynchMng {
             @Override
             public void onPostRequestComplete(int responseCode) {
                 System.out.println("Response Code: " + responseCode);
-                // Check if the status code is 200 (OK)
+
                 if (responseCode == 200) {
                     System.out.println("Request successful");
                     changeToSynchOrders(orders);
@@ -58,15 +63,16 @@ public class SynchMan implements ISynchMng {
                     System.out.println("Request failed");
                     Tost.show("Synchronization failed", context);
                 }
+
+                // Notify the caller that the synch operation is complete
+                synchCompleteListener.onSynchComplete(responseCode);
             }
         });
-
-
     }
 
 
 
-    @Override
+
     public boolean checkCommonCases() {
         // server is not configured
         sm = new SettingsMng(context);
@@ -87,7 +93,7 @@ public class SynchMan implements ISynchMng {
 
 
 
-    @Override
+
     public void changeToSynchOrders(List<Order> list) {
         for (Order order: list){
             order.setIsSynch(1);
