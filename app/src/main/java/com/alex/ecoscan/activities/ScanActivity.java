@@ -86,10 +86,17 @@ public class ScanActivity extends AppCompatActivity implements CodeAdapter.OnIte
         Log.i(TAG, "try to saveNewCodeToLocalMemory: " + decodedData);
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
         getLastLocation();
-        Code code = filteringData(new Code(
-                decodedData, decodedLabelType,
-                String.valueOf(currentLocation.getLongitude()),
-                String.valueOf(currentLocation.getLatitude())));
+
+        Code code;
+        if (settingsMng.isAddGPS()){
+            code = filteringData(new Code(
+                    decodedData, decodedLabelType,
+                    String.valueOf(currentLocation.getLongitude()),
+                    String.valueOf(currentLocation.getLatitude())));
+        } else {
+            code = filteringData(new Code(decodedData, decodedLabelType, "none", "none"));
+        }
+
         if (code != null){
             codeList.add(code);
             Log.d(TAG, "Code was saved: " + code);
