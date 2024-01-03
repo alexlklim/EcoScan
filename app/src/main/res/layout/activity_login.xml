@@ -6,5 +6,56 @@
     android:layout_height="match_parent"
     android:background="@drawable/app_main_fon"
     tools:context=".activities.LoginActivity">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/app_main_fon"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:paddingTop="150dp">
 
+        <TextView
+            android:id="@+id/login_result"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="20dp"
+            android:text=""
+            android:textColor="#F44336"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="login"
+            android:inputType="text"
+            android:minHeight="48dp"
+            android:text=""
+            android:textSize="20sp"
+            android:autofillHints="" />
+
+        <EditText
+            android:id="@+id/password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="password"
+            android:inputType="textPassword"
+            android:minHeight="48dp"
+            android:text=""
+            android:textSize="20sp" />
+
+
+        <Button
+            android:id="@+id/btn_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/btnStyle"
+            android:minWidth="200dp"
+            android:minHeight="48dp"
+            android:text="Login"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+    </LinearLayout>
 </LinearLayout>

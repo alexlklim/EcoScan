@@ -42,8 +42,9 @@ public class DialogChangePw extends AppCompatDialogFragment {
 
         btnConfirm.setOnClickListener(v -> {
             String pwNew = d_newPw.getText().toString();
-            String pwOld = settingsMng.getPassword();
-            if (pwNew.equals(pwOld)){
+            String pwOld = d_oldPw.getText().toString();
+            String pwCorrect = settingsMng.getPassword();
+            if (pwOld.equals(pwCorrect)){
                 settingsMng.setNewPw(pwNew);
                 Tost.show("Password was changed", requireContext());
                 dismiss();

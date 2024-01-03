@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatDialogFragment;
 import com.alex.ecoscan.R;
 import com.alex.ecoscan.managers.FormatMng;
 import com.alex.ecoscan.managers.SettingsMng;
+import com.alex.ecoscan.managers.Tost;
 
 public class DialogResetSettings extends AppCompatDialogFragment {
     private static final String TAG = "DialogResetSettings";
@@ -33,12 +34,12 @@ public class DialogResetSettings extends AppCompatDialogFragment {
         Button btn_no = view.findViewById(R.id.btn_no);
 
         btn_yes.setOnClickListener(v -> {
-
+            settingsMng.setDefaultSettings();
+            Tost.show("Default settings was set", requireContext());
             dismiss();
         });
 
         btn_no.setOnClickListener(v -> {
-
             dismiss();
         });
 
