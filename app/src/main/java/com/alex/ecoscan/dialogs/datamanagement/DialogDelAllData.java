@@ -24,6 +24,8 @@ import java.util.List;
 public class DialogDelAllData extends AppCompatDialogFragment {
     private static final String TAG = "DialogDelAllData";
     RoomDB roomDB;
+    private FragmentActivity fragmentActivity;  // Added reference to FragmentActivity
+
     SettingsMng settingsMng;
     @NonNull
     @Override
