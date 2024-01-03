@@ -24,6 +24,7 @@ import com.alex.ecoscan.model.Order;
 import com.alex.ecoscan.model.utiles.Util;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import okhttp3.OkHttpClient;
@@ -56,13 +57,6 @@ public class OrdersActivity extends AppCompatActivity implements OrdersAdapter.O
 
         ImageView menu = findViewById(R.id.os_menu);
         menu.setOnClickListener(v -> showPopupMenu(menu));
-
-
-
-        // try to synch block
-        synchMan = new SynchMan(this);
-        synchMan.synchOrder(new Order());
-
 
 
     }

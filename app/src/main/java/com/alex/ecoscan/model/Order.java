@@ -7,6 +7,9 @@ import androidx.room.PrimaryKey;
 
 import com.alex.ecoscan.managers.DateMng;
 import com.alex.ecoscan.model.utiles.Util;
+import com.google.gson.Gson;
+
+import java.util.List;
 
 @Entity(tableName = Util.TABLE_NAME_ORDER)
 public class Order {
@@ -27,6 +30,18 @@ public class Order {
     private int isHidden;
 
     public Order() {
+    }
+
+    @Ignore
+    public String toJsonWithCodes(List<Code> codes) {
+        OrderWithCodes orderWithCodes = new OrderWithCodes(this, codes);
+        Gson gson = new Gson();
+        return gson.toJson(orderWithCodes);
+    }
+
+    @Ignore
+    public OrderWithCodes toOrderWithCodes(List<Code> codes) {
+        return new OrderWithCodes(this, codes);
     }
 
     @Ignore

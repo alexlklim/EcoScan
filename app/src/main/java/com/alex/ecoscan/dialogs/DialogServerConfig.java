@@ -28,7 +28,6 @@ public class DialogServerConfig extends AppCompatDialogFragment {
     EditText set_serverAddress;
     ImageView set_connectionResultImage;
     TextView set_connectionResultText;
-    static boolean connectionResult;
 
 
     @NonNull
@@ -116,9 +115,6 @@ public class DialogServerConfig extends AppCompatDialogFragment {
                         }
                     });
                 }
-
-
-                Log.e(TAG, "performHttpsRequestInBackground: " + status);
             }
         }).start();
     }

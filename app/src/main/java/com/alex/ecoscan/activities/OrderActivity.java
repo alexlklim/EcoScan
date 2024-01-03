@@ -123,7 +123,7 @@ public class OrderActivity extends AppCompatActivity implements OrderAdapter.OnI
 
     public void synchOrderWithServer(View view){
         SynchMan synchMan = new SynchMan(this);
-        synchMan.synchOrder(order);
+//        synchMan.synchOrder(order);
     }
 
 
