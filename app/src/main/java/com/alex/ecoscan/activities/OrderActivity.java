@@ -107,7 +107,7 @@ public class OrderActivity extends AppCompatActivity implements OrderAdapter.OnI
         rv_so_iv_del = findViewById(R.id.ro_delete);
         RecyclerView recyclerView = findViewById(R.id.o_rv_order);
         codeList = roomDB.codeDAO().getAllByOrderID(orderId);
-        orderAdapter = new OrderAdapter(codeList, this);
+        orderAdapter = new OrderAdapter(codeList, this, settingsMng.isAllowEditOrders());
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(orderAdapter);
     }
