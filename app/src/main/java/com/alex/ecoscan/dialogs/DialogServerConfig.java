@@ -3,6 +3,7 @@ package com.alex.ecoscan.dialogs;
 import android.app.Dialog;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -16,6 +17,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
 import com.alex.ecoscan.R;
+import com.alex.ecoscan.managers.NetworkMng;
 import com.alex.ecoscan.managers.SettingsMng;
 
 public class DialogServerConfig extends AppCompatDialogFragment {
@@ -26,6 +28,7 @@ public class DialogServerConfig extends AppCompatDialogFragment {
     EditText set_serverAddress;
     ImageView set_connectionResultImage;
     TextView set_connectionResultText;
+    static boolean connectionResult;
 
 
     @NonNull
@@ -46,32 +49,84 @@ public class DialogServerConfig extends AppCompatDialogFragment {
         set_connectionResultImage.setVisibility(View.INVISIBLE);
         set_connectionResultText.setVisibility(View.INVISIBLE);
 
+        if (settingsMng.isServerConfigured()){
+            setIfSuccess();
+            setVisible();
+        }
 
         set_btn_checkConnection.setOnClickListener(v ->{
+            setInvisible();
+            if (!NetworkMng.isNetworkAvailable(requireContext())){
+                setIfFail();
+                setVisible();
+                settingsMng.setIsServerConfigured(false);
+            }
+
             // check connection
-            boolean connectionResult = false;
-            settingsMng.setServerAddress(set_serverAddress.getText().toString());
-            settingsMng.setIsServerConfigured(connectionResult);
-            set_connectionResultImage.setVisibility(View.VISIBLE);
-            set_connectionResultText.setVisibility(View.VISIBLE);
-
-            if (connectionResult) {
-                set_connectionResultImage.setImageResource(R.drawable.ic_success);
-                set_connectionResultText.setText(R.string.server_was_configured);
-                set_connectionResultText.setTextColor(Color.GREEN);
-
-            } else {
-                set_connectionResultImage.setImageResource(R.drawable.ic_fail);
-                set_connectionResultText.setText(R.string.something_wrong_with_server);
-                set_connectionResultText.setTextColor(Color.RED);
+            if (NetworkMng.isNetworkAvailable(requireContext())){
+                performHttpsRequestInBackground(settingsMng.getServerAddress(), DialogServerConfig.this);
             }
 
         });
 
         return builder.create();
     }
+    public void setIfSuccess(){
+        settingsMng.setIsServerConfigured(true);
+        set_connectionResultImage.setImageResource(R.drawable.ic_success);
+        set_connectionResultText.setText(R.string.server_was_configured);
+        set_connectionResultText.setTextColor(Color.GREEN);
+    }
+    public void setIfFail(){
+        set_connectionResultImage.setImageResource(R.drawable.ic_fail);
+        set_connectionResultText.setText(R.string.something_wrong_with_server);
+        set_connectionResultText.setTextColor(Color.RED);
+    }
+    public void setVisible(){
+        settingsMng.setServerAddress(set_serverAddress.getText().toString());
+        set_connectionResultImage.setVisibility(View.VISIBLE);
+        set_connectionResultText.setVisibility(View.VISIBLE);
+    }
+    public void setInvisible(){
+        set_connectionResultImage.setVisibility(View.INVISIBLE);
+        set_connectionResultText.setVisibility(View.INVISIBLE);
+    }
+
+
+    public static void performHttpsRequestInBackground(final String url, final DialogServerConfig dialogServerConfig) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                int status = NetworkMng.doHttpsGetRequest(url);
+                if (status >= 200 && status <= 300) {
+                    dialogServerConfig.getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            dialogServerConfig.setIfSuccess();
+                            dialogServerConfig.setVisible();
+                        }
+                    });
+                } else {
+                    dialogServerConfig.getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            dialogServerConfig.setIfFail();
+                            dialogServerConfig.setVisible();
+
+                        }
+                    });
+                }
+
+
+                Log.e(TAG, "performHttpsRequestInBackground: " + status);
+            }
+        }).start();
+    }
+
 
 
 
 
 }
+
+

@@ -17,9 +17,11 @@ import android.widget.TextView;
 import com.alex.ecoscan.R;
 import com.alex.ecoscan.adapters.OrdersAdapter;
 import com.alex.ecoscan.database.RoomDB;
+import com.alex.ecoscan.managers.NetworkMng;
 import com.alex.ecoscan.managers.SettingsMng;
 import com.alex.ecoscan.managers.SynchMan;
 import com.alex.ecoscan.model.Order;
+import com.alex.ecoscan.model.utiles.Util;
 
 import java.io.IOException;
 import java.util.List;
@@ -55,9 +57,14 @@ public class OrdersActivity extends AppCompatActivity implements OrdersAdapter.O
         ImageView menu = findViewById(R.id.os_menu);
         menu.setOnClickListener(v -> showPopupMenu(menu));
 
-//        sentRequest();
 
-        new SendRequestTask().execute();
+
+        // try to synch block
+        synchMan = new SynchMan(this);
+        synchMan.synchOrder(new Order());
+
+
+
     }
 
 
@@ -110,49 +117,6 @@ public class OrdersActivity extends AppCompatActivity implements OrdersAdapter.O
         });
         popupMenu.show();
     }
-
-
-    private class SendRequestTask extends AsyncTask<Void, Void, Integer> {
-
-        @Override
-        protected Integer doInBackground(Void... voids) {
-            // Use OkHttpClient singleton
-            OkHttpClient client = new OkHttpClient();
-
-            String url = "https://webhook.site/cf20be59-150b-491c-a279-7912cf18c78e";
-
-            Request request = new Request.Builder()
-                    .url(url)
-                    .build();
-            try {
-                Response response = client.newCall(request).execute();
-                return response.code();
-            } catch (IOException e) {
-                // Handle the exception appropriately (e.g., log or notify the user)
-                e.printStackTrace();
-                return -1; // Use a sentinel value for error
-            }
-        }
-
-        @Override
-        protected void onPostExecute(Integer statusCode) {
-            // Process the result on the main thread (update UI or perform other actions)
-            System.out.println("!!!!!!!!!!!!!!!!!");
-            System.out.println("CALL");
-
-            // Check the status code
-            if (statusCode == 200) {
-                System.out.println("Request was successful. Status code: " + statusCode);
-                // Handle the success case
-            } else {
-                System.out.println("Request failed. Status code: " + statusCode);
-                // Handle other status codes if needed
-            }
-        }
-    }
-
-
-// To execute the task:
 
 
 

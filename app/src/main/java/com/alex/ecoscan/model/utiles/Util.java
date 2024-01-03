@@ -9,7 +9,7 @@ public class Util {
     public static final String DATABASE_NAME = "scanner";
     public static final String  TABLE_NAME_CODE = "codes";
     public static final String  TABLE_NAME_ORDER = "orders";
-    public static final String URL = "https://webhook.site/39298b45-e2c6-4845-ab21-798e57e5c858";
+    public static final String URL = "https://webhook.site/65584c51-85e7-4796-a6d4-fe3b20afe410";
 
 
 }
