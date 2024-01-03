@@ -100,28 +100,28 @@ public class SettingsActivity extends AppCompatActivity
         });
     }
     private void initializeAdminConfig() {
-        set_isAllowEditCode = findViewById(R.id.set_isAllowEditCode);
+//        set_isAllowEditCode = findViewById(R.id.set_isAllowEditCode);
         set_isAllowEditOrder = findViewById(R.id.set_isAllowEditOrder);
         set_isAddGPS = findViewById(R.id.set_isAddGPS);
         set_isEnableLogging = findViewById(R.id.set_isEnableLogging);
 
-        set_isAllowEditCode.setChecked(settingsMng.isAllowEditCode());
+//        set_isAllowEditCode.setChecked(settingsMng.isAllowEditCode());
         set_isAllowEditOrder.setChecked(settingsMng.isAllowEditOrders());
         set_isAddGPS.setChecked(settingsMng.isAddGPS());
         set_isEnableLogging.setChecked(settingsMng.isEnableLogin());
 
 
-        ll_isAllowEditCode = findViewById(R.id.ll_isAllowEditCode);
+//        ll_isAllowEditCode = findViewById(R.id.ll_isAllowEditCode);
         ll_isAllowEditOrders = findViewById(R.id.ll_isAllowEditOrders);
         ll_isAddGPS = findViewById(R.id.ll_isAddGPS);
         ll_isEnableLogging = findViewById(R.id.ll_isEnableLogging);
 
 
-        ll_isAllowEditCode.setOnClickListener(v -> changeColor(ll_isAllowEditCode));
-        set_isAllowEditCode.setOnCheckedChangeListener((btnView, isChecked) -> {
-            changeColor(ll_isAllowEditCode);
-            settingsMng.setIsAllowEditCode(isChecked);
-        });
+//        ll_isAllowEditCode.setOnClickListener(v -> changeColor(ll_isAllowEditCode));
+//        set_isAllowEditCode.setOnCheckedChangeListener((btnView, isChecked) -> {
+//            changeColor(ll_isAllowEditCode);
+//            settingsMng.setIsAllowEditCode(isChecked);
+//        });
 
         ll_isAllowEditOrders.setOnClickListener(v -> changeColor(ll_isAllowEditOrders));
         set_isAllowEditOrder.setOnCheckedChangeListener((btnView, isChecked) -> {
@@ -245,15 +245,15 @@ public class SettingsActivity extends AppCompatActivity
 
     }
     private void initializeButtons() {
-        set_getSettingsFromServer = findViewById(R.id.set_getSettingsFromServer);
+//        set_getSettingsFromServer = findViewById(R.id.set_getSettingsFromServer);
         set_changeLogin = findViewById(R.id.set_changeLogin);
         set_changePw = findViewById(R.id.set_changePw);
         set_resetSettings = findViewById(R.id.set_resetSettings);
 
-        set_getSettingsFromServer.setOnClickListener(v -> {
-            changeColorForButton(set_getSettingsFromServer);
-            openDialogGetSettingsFromServer();
-        });
+//        set_getSettingsFromServer.setOnClickListener(v -> {
+//            changeColorForButton(set_getSettingsFromServer);
+//            openDialogGetSettingsFromServer();
+//        });
 
         set_changeLogin.setOnClickListener(v -> {
             changeColorForButton(set_changeLogin);
