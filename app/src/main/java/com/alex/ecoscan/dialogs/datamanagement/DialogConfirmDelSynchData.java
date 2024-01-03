@@ -10,14 +10,18 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatDialogFragment;
+import androidx.fragment.app.FragmentActivity;
 
 import com.alex.ecoscan.R;
+import com.alex.ecoscan.database.RoomDB;
 import com.alex.ecoscan.managers.SettingsMng;
+import com.alex.ecoscan.managers.Tost;
 
 public class DialogConfirmDelSynchData extends AppCompatDialogFragment {
     private static final String TAG = "DialogConfirmDelSynchData";
 
-
+    RoomDB roomDB;
+    private FragmentActivity fragmentActivity;
     SettingsMng settingsMng;
     @NonNull
     @Override
@@ -27,12 +31,16 @@ public class DialogConfirmDelSynchData extends AppCompatDialogFragment {
         View view = inflater.inflate(R.layout.dialog_confirm, null);
         builder.setView(view).setTitle("Delete all synch data");
         settingsMng = new SettingsMng(requireContext());
+        roomDB = RoomDB.getInstance(requireContext());
+        fragmentActivity = requireActivity();
 
         Button btn_yes = view.findViewById(R.id.btn_yes);
         Button btn_no = view.findViewById(R.id.btn_no);
 
         btn_yes.setOnClickListener(v -> {
-
+            roomDB.orderDAO().deleteAllSynch();
+            Tost.show("All synch orders was deleted", requireContext());
+            dismiss();
             dismiss();
         });
 

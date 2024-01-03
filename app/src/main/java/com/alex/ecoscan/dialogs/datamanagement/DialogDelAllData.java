@@ -10,14 +10,20 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatDialogFragment;
+import androidx.fragment.app.FragmentActivity;
 
 import com.alex.ecoscan.R;
+import com.alex.ecoscan.database.RoomDB;
 import com.alex.ecoscan.managers.FormatMng;
 import com.alex.ecoscan.managers.SettingsMng;
+import com.alex.ecoscan.managers.Tost;
+import com.alex.ecoscan.model.Order;
+
+import java.util.List;
 
 public class DialogDelAllData extends AppCompatDialogFragment {
     private static final String TAG = "DialogDelAllData";
-
+    RoomDB roomDB;
     SettingsMng settingsMng;
     @NonNull
     @Override
@@ -28,12 +34,17 @@ public class DialogDelAllData extends AppCompatDialogFragment {
         FormatMng formatMng = new FormatMng();
         builder.setView(view).setTitle("Delete all data about orders");
         settingsMng = new SettingsMng(requireContext());
+        roomDB = RoomDB.getInstance(requireContext());
+        fragmentActivity = requireActivity();
+
 
         Button btn_yes = view.findViewById(R.id.btn_yes);
         Button btn_no = view.findViewById(R.id.btn_no);
 
         btn_yes.setOnClickListener(v -> {
-
+            roomDB.orderDAO().deleteAllOrders();
+            roomDB.codeDAO().deleteAllCodes();
+            Tost.show("All  orders was deleted", requireContext());
             dismiss();
         });
 

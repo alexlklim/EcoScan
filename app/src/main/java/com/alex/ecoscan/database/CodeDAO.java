@@ -29,4 +29,7 @@ public interface CodeDAO {
 
     @Delete
     void delete(Code code);
+
+    @Query("DELETE FROM codes")
+    void deleteAllCodes();
 }

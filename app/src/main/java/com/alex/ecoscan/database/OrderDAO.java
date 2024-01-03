@@ -45,4 +45,7 @@ public interface OrderDAO {
     void deleteAllSynch();
 
 
+    @Query("DELETE FROM orders")
+    void deleteAllOrders();
+
 }
