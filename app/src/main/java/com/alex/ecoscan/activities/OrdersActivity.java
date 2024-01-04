@@ -1,35 +1,25 @@
 package com.alex.ecoscan.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Context;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
-import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.alex.ecoscan.R;
 import com.alex.ecoscan.adapters.OrdersAdapter;
 import com.alex.ecoscan.database.RoomDB;
-import com.alex.ecoscan.managers.NetworkMng;
 import com.alex.ecoscan.managers.SettingsMng;
 import com.alex.ecoscan.managers.SynchMan;
 import com.alex.ecoscan.model.Order;
-import com.alex.ecoscan.model.utiles.Util;
 
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
-
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
 
 public class OrdersActivity extends AppCompatActivity implements OrdersAdapter.OnItemClickListener{
     private static final String TAG = "OrdersActivity";
@@ -69,17 +59,7 @@ public class OrdersActivity extends AppCompatActivity implements OrdersAdapter.O
     private void autoSynch() {
         if (settingsMng.isServerConfigured() && settingsMng.isAutoSynch() && settingsMng.isSentData()){
             synchMan = new SynchMan(this);
-            synchMan.synchOrders(roomDB.orderDAO().getNonSynch(), new SynchMan.OnSynchCompleteListener() {
-                @Override
-                public void onSynchComplete(int responseCode) {
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            initializeRecyclerView();
-                        }
-                    });
-                }
-            });
+            synchMan.synchOrders(roomDB.orderDAO().getNonSynch(), responseCode -> runOnUiThread(this::initializeRecyclerView));
         }
     }
 

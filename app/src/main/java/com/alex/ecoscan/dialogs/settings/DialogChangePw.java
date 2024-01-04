@@ -14,12 +14,10 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
 import com.alex.ecoscan.R;
-import com.alex.ecoscan.managers.FormatMng;
 import com.alex.ecoscan.managers.SettingsMng;
 import com.alex.ecoscan.managers.Tost;
 
 public class DialogChangePw extends AppCompatDialogFragment {
-    private static final String TAG = "DialogChangePw";
 
     SettingsMng settingsMng;
     @NonNull
@@ -28,16 +26,15 @@ public class DialogChangePw extends AppCompatDialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(requireActivity());
         LayoutInflater inflater = requireActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.dialog_change_login_pw, null);
-        FormatMng formatMng = new FormatMng();
-        builder.setView(view).setTitle("Change password");
+        builder.setView(view).setTitle(R.string.change_password);
         settingsMng = new SettingsMng(requireContext());
 
         TextView d_textChange = view.findViewById(R.id.d_textChange);
         EditText d_newPw = view.findViewById(R.id.d_first);
         EditText d_oldPw = view.findViewById(R.id.d_second);
-        d_newPw.setHint("new password");
-        d_oldPw.setHint("old password");
-        d_textChange.setText("Change password");
+        d_newPw.setHint(R.string.new_password);
+        d_oldPw.setHint(R.string.old_password);
+        d_textChange.setText(R.string.change_password);
         Button btnConfirm = view.findViewById(R.id.d_btn_confirm);
 
         btnConfirm.setOnClickListener(v -> {
@@ -46,10 +43,10 @@ public class DialogChangePw extends AppCompatDialogFragment {
             String pwCorrect = settingsMng.getPassword();
             if (pwOld.equals(pwCorrect)){
                 settingsMng.setNewPw(pwNew);
-                Tost.show("Password was changed", requireContext());
+                Tost.show(getString(R.string.password_was_changed), requireContext());
                 dismiss();
             }
-            Tost.show("Something wrong", requireContext());
+            Tost.show(getString(R.string.something_wrong), requireContext());
 
         });
 

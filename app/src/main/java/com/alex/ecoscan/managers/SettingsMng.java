@@ -201,9 +201,7 @@ public class SettingsMng implements ISettingsMng {
     }
 
 
-    public boolean isAllowEditCode() {
-        return pref.getBoolean(Db.IS_ALLOW_EDIT_CODE, false);
-    }
+
     public boolean isAllowEditOrders() {
         return pref.getBoolean(Db.IS_ALLOW_EDIT_ORDER, false);
     }

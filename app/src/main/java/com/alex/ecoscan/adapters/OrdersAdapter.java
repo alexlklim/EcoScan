@@ -24,9 +24,9 @@ import java.util.List;
 
 public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.OrderViewHolder> {
 
-    private List<Order> orderList;
-    private RoomDB roomDB;
-    private OnItemClickListener onItemClickListener;
+    private final List<Order> orderList;
+    private final RoomDB roomDB;
+    private final OnItemClickListener onItemClickListener;
     // Constructor to initialize the orderList
     public OrdersAdapter(List<Order> orderList, OnItemClickListener onItemClickListener, RoomDB roomDB) {
         this.orderList = orderList;
@@ -103,9 +103,7 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.OrderViewH
         ValueAnimator colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), colorFrom, colorTo);
         colorAnimation.setDuration(initialDuration);
 
-        colorAnimation.addUpdateListener(animator -> {
-            view.setBackgroundColor((int) animator.getAnimatedValue());
-        });
+        colorAnimation.addUpdateListener(animator -> view.setBackgroundColor((int) animator.getAnimatedValue()));
 
         colorAnimation.addListener(new AnimatorListenerAdapter() {
             @Override
@@ -126,9 +124,7 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.OrderViewH
         ValueAnimator colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), colorFrom, colorTo);
         colorAnimation.setDuration(300); // milliseconds
 
-        colorAnimation.addUpdateListener(animator -> {
-            view.setBackgroundColor((int) animator.getAnimatedValue());
-        });
+        colorAnimation.addUpdateListener(animator -> view.setBackgroundColor((int) animator.getAnimatedValue()));
 
         colorAnimation.start();
     }

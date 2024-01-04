@@ -3,7 +3,6 @@ package com.alex.ecoscan.dialogs;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -20,17 +19,14 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
 import com.alex.ecoscan.R;
-import com.alex.ecoscan.managers.FormatMng;
 import com.alex.ecoscan.managers.SettingsMng;
 import com.alex.ecoscan.model.enums.Label;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class DialogAdvancedFilter extends AppCompatDialogFragment {
-    private static final String TAG = "DialogAdvancedFilter";
 
     SettingsMng settingsMng;
     private EditText set_prefix, set_suffix, set_ending;
@@ -51,8 +47,7 @@ public class DialogAdvancedFilter extends AppCompatDialogFragment {
         labelFilterList = new ArrayList<>(settingsMng.getLabels());
         set_labelList = view.findViewById(R.id.set_labelList);
         if (settingsMng.getLabels().isEmpty()) set_labelList.setText(R.string.all_labels_are_accepted);
-        else set_labelList.setText(new ArrayList<>(settingsMng.getLabels())
-                .stream().collect(Collectors.joining(", ")));
+        else set_labelList.setText(String.join(", ", new ArrayList<>(settingsMng.getLabels())));
 
 
         set_prefix = view.findViewById(R.id.set_prefix);
@@ -125,7 +120,7 @@ public class DialogAdvancedFilter extends AppCompatDialogFragment {
                 String selectedLabel = (String) parentView.getItemAtPosition(position);
                 if (!selectedLabel.equals(Label.NONE.getLabelName()) && !labelFilterList.contains(selectedLabel)){
                     labelFilterList.add(selectedLabel);
-                    set_labelList.setText(labelFilterList.stream().collect(Collectors.joining(", ")));
+                    set_labelList.setText(String.join(", ", labelFilterList));
                 }
             }
 

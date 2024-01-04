@@ -7,20 +7,8 @@ import com.alex.ecoscan.model.Order;
 
 import java.util.List;
 
-public class FormatMng implements IFormatMng {
-    @Override
-    public String getJsonFromOrder(Order order) {
-        return null;
-    }
+public class FormatMng {
 
-    @Override
-    public String getJsonFromOrders(List<Order> list) {
-        return null;
-    }
-
-
-
-    @Override
     public int parseIntFromStringOrDefaultZero(String value) {
         try {
             return Integer.parseInt(value);

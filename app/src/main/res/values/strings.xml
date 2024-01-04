@@ -98,6 +98,18 @@
     <string name="synch_with_server">Synch with server</string>
     <string name="hide_synch_orders">Hide synch orders</string>
     <string name="show_all_orders">Show all orders</string>
+    <string name="login_or_password_are_incorrect">Login or password are incorrect!</string>
+    <string name="delete_order_without_synchoronization">Delete order without synchoronization?</string>
+    <string name="delete_order">Delete order?</string>
+    <string name="you_try_to_delete_last_code_in_order_after_this_order_will_delete_automatically">You try to delete last code in order? After this order will delete automatically</string>
+    <string name="order_was_saved_successfully">Order was saved successfully</string>
+    <string name="change_password2">Change password</string>
+    <string name="new_password">new password</string>
+    <string name="old_password">old password</string>
+    <string name="password_was_changed">Password was changed</string>
+    <string name="reset_all_settings">Reset all settings</string>
+    <string name="default_settings_was_set">Default settings was set</string>
+    <string name="order_number_already_exists">Order number already exists</string>
 
 
 </resources>

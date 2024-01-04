@@ -10,21 +10,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatDialogFragment;
-import androidx.fragment.app.FragmentActivity;
 
 import com.alex.ecoscan.R;
 import com.alex.ecoscan.database.RoomDB;
-import com.alex.ecoscan.managers.FormatMng;
 import com.alex.ecoscan.managers.SettingsMng;
 import com.alex.ecoscan.managers.Tost;
-import com.alex.ecoscan.model.Order;
-
-import java.util.List;
 
 public class DialogDelAllData extends AppCompatDialogFragment {
-    private static final String TAG = "DialogDelAllData";
     RoomDB roomDB;
-    private FragmentActivity fragmentActivity;  // Added reference to FragmentActivity
 
     SettingsMng settingsMng;
     @NonNull
@@ -33,12 +26,9 @@ public class DialogDelAllData extends AppCompatDialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(requireActivity());
         LayoutInflater inflater = requireActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.dialog_confirm, null);
-        FormatMng formatMng = new FormatMng();
         builder.setView(view).setTitle("Delete all data about orders");
         settingsMng = new SettingsMng(requireContext());
         roomDB = RoomDB.getInstance(requireContext());
-        fragmentActivity = requireActivity();
-
 
         Button btn_yes = view.findViewById(R.id.btn_yes);
         Button btn_no = view.findViewById(R.id.btn_no);
@@ -50,10 +40,7 @@ public class DialogDelAllData extends AppCompatDialogFragment {
             dismiss();
         });
 
-        btn_no.setOnClickListener(v -> {
-
-            dismiss();
-        });
+        btn_no.setOnClickListener(v -> dismiss());
 
 
         return builder.create();

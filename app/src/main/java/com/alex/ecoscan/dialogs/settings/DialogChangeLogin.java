@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,12 +13,10 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
 import com.alex.ecoscan.R;
-import com.alex.ecoscan.managers.FormatMng;
 import com.alex.ecoscan.managers.SettingsMng;
 import com.alex.ecoscan.managers.Tost;
 
 public class DialogChangeLogin extends AppCompatDialogFragment {
-    private static final String TAG = "DialogChangeLogin";
 
     SettingsMng settingsMng;
     @NonNull
@@ -28,11 +25,9 @@ public class DialogChangeLogin extends AppCompatDialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(requireActivity());
         LayoutInflater inflater = requireActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.dialog_change_login_pw, null);
-        FormatMng formatMng = new FormatMng();
         builder.setView(view).setTitle("Change login");
         settingsMng = new SettingsMng(requireContext());
 
-        TextView d_textChange = view.findViewById(R.id.d_textChange);
         EditText d_login = view.findViewById(R.id.d_first);
         EditText d_pw = view.findViewById(R.id.d_second);
 

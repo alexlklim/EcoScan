@@ -12,32 +12,23 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.alex.ecoscan.R;
 import com.alex.ecoscan.managers.DateMng;
-import com.alex.ecoscan.managers.SettingsMng;
 import com.alex.ecoscan.model.Code;
 
 import java.util.List;
 
 public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> {
 
-    private List<Code> codeList;
+    private final List<Code> codeList;
 
-    private OnItemClickListener onItemClickListener;
+    private final OnItemClickListener onItemClickListener;
     static boolean isAllowEdit;
 
     public OrderAdapter(List<Code> codeList, OnItemClickListener onItemClickListener, boolean isAllowEdit) {
         this.codeList = codeList;
         this.onItemClickListener = onItemClickListener;
-        this.isAllowEdit = isAllowEdit;
+        OrderAdapter.isAllowEdit = isAllowEdit;
     }
 
-    public boolean newCodeListAfterDeleting(Code code) {
-        codeList.remove(code);
-        if (codeList.isEmpty()) {
-            return false;
-        }
-        return true;
-
-    }
 
     @NonNull
     @Override

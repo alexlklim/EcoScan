@@ -16,11 +16,9 @@ import java.util.List;
 public class CodeAdapter extends RecyclerView.Adapter<CodeAdapter.CodeViewHolder> {
 
     private List<Code> codeList;
-    private OnItemClickListener onItemClickListener;
 
     public CodeAdapter(List<Code> codeList, OnItemClickListener onItemClickListener) {
         this.codeList = codeList;
-        this.onItemClickListener = onItemClickListener;
     }
 
     @NonNull

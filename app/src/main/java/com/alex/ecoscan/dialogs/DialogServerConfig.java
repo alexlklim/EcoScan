@@ -3,7 +3,6 @@ package com.alex.ecoscan.dialogs;
 import android.app.Dialog;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -21,7 +20,6 @@ import com.alex.ecoscan.managers.NetworkMng;
 import com.alex.ecoscan.managers.SettingsMng;
 
 public class DialogServerConfig extends AppCompatDialogFragment {
-    private static final String TAG = "DialogServerConfig";
 
     SettingsMng settingsMng;
     Button set_btn_checkConnection;
@@ -93,28 +91,19 @@ public class DialogServerConfig extends AppCompatDialogFragment {
 
 
     public static void performHttpsRequestInBackground(final String url, final DialogServerConfig dialogServerConfig) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                int status = NetworkMng.doHttpsGetRequest(url);
-                if (status >= 200 && status <= 300) {
-                    dialogServerConfig.getActivity().runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            dialogServerConfig.setIfSuccess();
-                            dialogServerConfig.setVisible();
-                        }
-                    });
-                } else {
-                    dialogServerConfig.getActivity().runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            dialogServerConfig.setIfFail();
-                            dialogServerConfig.setVisible();
+        new Thread(() -> {
+            int status = NetworkMng.doHttpsGetRequest(url);
+            if (status >= 200 && status <= 300) {
+                dialogServerConfig.getActivity().runOnUiThread(() -> {
+                    dialogServerConfig.setIfSuccess();
+                    dialogServerConfig.setVisible();
+                });
+            } else {
+                dialogServerConfig.getActivity().runOnUiThread(() -> {
+                    dialogServerConfig.setIfFail();
+                    dialogServerConfig.setVisible();
 
-                        }
-                    });
-                }
+                });
             }
         }).start();
     }

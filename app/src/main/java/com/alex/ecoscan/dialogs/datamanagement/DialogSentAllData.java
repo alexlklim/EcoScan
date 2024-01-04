@@ -14,18 +14,15 @@ import androidx.fragment.app.FragmentActivity;
 
 import com.alex.ecoscan.R;
 import com.alex.ecoscan.database.RoomDB;
-import com.alex.ecoscan.managers.FormatMng;
 import com.alex.ecoscan.managers.SettingsMng;
 import com.alex.ecoscan.managers.SynchMan;
 import com.alex.ecoscan.managers.Tost;
 import com.alex.ecoscan.model.Order;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
 public class DialogSentAllData extends AppCompatDialogFragment {
-    private static final String TAG = "DialogSentAllData";
 
     SynchMan synchMan;
     RoomDB roomDB;
@@ -39,7 +36,6 @@ public class DialogSentAllData extends AppCompatDialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(requireActivity());
         LayoutInflater inflater = requireActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.dialog_confirm, null);
-        FormatMng formatMng = new FormatMng();
         builder.setView(view).setTitle("Sent all data to server");
         settingsMng = new SettingsMng(requireContext());
         synchMan = new SynchMan(requireContext());
@@ -56,9 +52,7 @@ public class DialogSentAllData extends AppCompatDialogFragment {
             dismiss();
         });
 
-        btn_no.setOnClickListener(v -> {
-            dismiss();
-        });
+        btn_no.setOnClickListener(v -> dismiss());
 
         return builder.create();
     }
@@ -66,17 +60,9 @@ public class DialogSentAllData extends AppCompatDialogFragment {
     private void synch() {
         List<Order> list = roomDB.orderDAO().getAll();
 
-        synchMan.synchOrders(list, new SynchMan.OnSynchCompleteListener() {
-            @Override
-            public void onSynchComplete(int responseCode) {
-                if (fragmentActivity != null) {  // Check if the activity is not null
-                    fragmentActivity.runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            Tost.show("All data was synch", fragmentActivity);
-                        }
-                    });
-                }
+        synchMan.synchOrders(list, responseCode -> {
+            if (fragmentActivity != null) {  // Check if the activity is not null
+                fragmentActivity.runOnUiThread(() -> Tost.show("All data was synch", fragmentActivity));
             }
         });
     }

@@ -18,7 +18,6 @@ import com.alex.ecoscan.managers.FormatMng;
 import com.alex.ecoscan.managers.SettingsMng;
 
 public class DialogLength extends AppCompatDialogFragment {
-    private static final String TAG = "DialogLength";
 
     private EditText etLength, etLengthMin, etLengthMax;
     private DialogLengthListener dialogLengthListener;

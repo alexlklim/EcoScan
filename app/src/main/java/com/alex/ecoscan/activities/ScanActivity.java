@@ -43,9 +43,7 @@ public class ScanActivity extends AppCompatActivity implements CodeAdapter.OnIte
     private FusedLocationProviderClient fusedLocationProviderClient;
     private SettingsMng settingsMng;
     private RoomDB roomDB;
-    private List<Code> codeList = new LinkedList<>();
-    private String orderNum;
-    private RecyclerView recyclerView;
+    private final List<Code> codeList = new LinkedList<>();
     private CodeAdapter codeAdapter;
     private SynchMan synchMan;
 
@@ -102,7 +100,6 @@ public class ScanActivity extends AppCompatActivity implements CodeAdapter.OnIte
             Log.d(TAG, "Code was saved: " + code);
             codeAdapter.notifyDataSetChanged();
         } else {
-            Log.d(TAG, "Code was not saved: doesn't match filters : " + code);
             Tost.show(getString(R.string.t_code_not_match_filter), this);
         }
     }
@@ -117,7 +114,7 @@ public class ScanActivity extends AppCompatActivity implements CodeAdapter.OnIte
 
 
     private void initializeRecyclerView() {
-        recyclerView = findViewById(R.id.sc_rv_codes);
+        RecyclerView recyclerView = findViewById(R.id.sc_rv_codes);
         codeAdapter = new CodeAdapter(codeList, this);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(codeAdapter);
@@ -251,13 +248,13 @@ public class ScanActivity extends AppCompatActivity implements CodeAdapter.OnIte
         builder.setView(dialog);
 
         if (roomDB.orderDAO().isExistByOrderNum(orderNumber) && result){
-            d_resultText.setText("Order was saved successfully");
+            d_resultText.setText(R.string.order_was_saved_successfully);
             d_resultImage.setImageResource(R.drawable.ic_success);
             Tost.show("Success", this);
             autoSynch();
 
         } else{
-            d_resultText.setText("Something wrong");
+            d_resultText.setText(R.string.something_wrong);
             d_resultImage.setImageResource(R.drawable.ic_fail);
             Tost.show("Something wrong", this);
         }
@@ -278,17 +275,7 @@ public class ScanActivity extends AppCompatActivity implements CodeAdapter.OnIte
     private void autoSynch() {
         if (settingsMng.isServerConfigured() && settingsMng.isAutoSynch() && settingsMng.isSentData()){
             synchMan = new SynchMan(this);
-            synchMan.synchOrders(roomDB.orderDAO().getNonSynch(), new SynchMan.OnSynchCompleteListener() {
-                @Override
-                public void onSynchComplete(int responseCode) {
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            initializeRecyclerView();
-                        }
-                    });
-                }
-            });
+            synchMan.synchOrders(roomDB.orderDAO().getNonSynch(), responseCode -> runOnUiThread(this::initializeRecyclerView));
         }
     }
 

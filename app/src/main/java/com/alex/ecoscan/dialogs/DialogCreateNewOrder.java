@@ -19,7 +19,6 @@ import com.alex.ecoscan.database.RoomDB;
 import com.alex.ecoscan.managers.Tost;
 
 public class DialogCreateNewOrder extends AppCompatDialogFragment {
-    private static final String TAG = "DialogCreateNewOrder";
 
     @NonNull
     @Override
@@ -37,10 +36,10 @@ public class DialogCreateNewOrder extends AppCompatDialogFragment {
             String orderNum = d_orderNum.getText().toString();
 
             if (orderNum.isEmpty()) {
-                Tost.show("Something wrong", requireContext());
+                Tost.show(getString(R.string.something_wrong), requireContext());
             } else if (RoomDB.getInstance(requireContext()).orderDAO().isExistByOrderNum(orderNum)) {
                 // check is this orderNumber is exist in DB
-                Tost.show("Order number already exists", requireContext());
+                Tost.show(getString(R.string.order_number_already_exists), requireContext());
             } else {
                 Intent intent = new Intent(requireActivity(), ScanActivity.class);
                 dismiss();

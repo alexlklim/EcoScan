@@ -23,8 +23,7 @@ public interface OrderDAO {
     @Query("SELECT * FROM orders WHERE isSynch = 0")
     List<Order> getNonSynch();
 
-    @Query("SELECT * FROM orders WHERE orderNum= :orderNum")
-    Order getOrderByOrderNum(String orderNum);
+
 
     @Query("SELECT * FROM orders WHERE id = :orderID")
     Order getOrderByOrderID(int orderID);

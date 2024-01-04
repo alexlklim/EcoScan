@@ -13,8 +13,7 @@ public class DateMng{
     public static String getCurrentTimeLikeString() {
         LocalDateTime currentDateTime = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        String formattedDateTime = currentDateTime.format(formatter);
-        return formattedDateTime;
+        return currentDateTime.format(formatter);
     }
 
 
@@ -31,15 +30,14 @@ public class DateMng{
         }
 
         // Format the Date object to the desired output format
-        String outputDateString = outputFormat.format(date);;
-        return outputDateString;
+        return outputFormat.format(date);
     }
 
     public static String extractHoursAndMinutes(String dateTime) {
         SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         SimpleDateFormat outputFormat = new SimpleDateFormat("HH:mm");
 
-        Date date = null;
+        Date date;
         try {
             date = inputFormat.parse(dateTime);
         } catch (ParseException e) {
@@ -47,7 +45,6 @@ public class DateMng{
             return null;
         }
         // Format the date as "HH:mm"
-        String formattedTime = outputFormat.format(date);
-        return formattedTime;
+        return outputFormat.format(date);
     }
 }

@@ -16,9 +16,6 @@ public interface CodeDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(Code code);
 
-    @Query("SELECT * FROM codes")
-    List<Code> getAll();
-
     @Query("SELECT * FROM codes WHERE orderID = :orderID")
     List<Code> getAllByOrderID(int orderID);
 

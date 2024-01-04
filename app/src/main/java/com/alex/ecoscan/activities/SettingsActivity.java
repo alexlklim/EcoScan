@@ -17,14 +17,13 @@ import androidx.core.content.ContextCompat;
 
 import com.alex.ecoscan.R;
 import com.alex.ecoscan.dialogs.DialogAdvancedFilter;
-import com.alex.ecoscan.dialogs.datamanagement.DialogConfirmDelSynchData;
-import com.alex.ecoscan.dialogs.datamanagement.DialogSentAllData;
-import com.alex.ecoscan.dialogs.datamanagement.DialogDelAllData;
 import com.alex.ecoscan.dialogs.DialogLength;
 import com.alex.ecoscan.dialogs.DialogServerConfig;
+import com.alex.ecoscan.dialogs.datamanagement.DialogConfirmDelSynchData;
+import com.alex.ecoscan.dialogs.datamanagement.DialogDelAllData;
+import com.alex.ecoscan.dialogs.datamanagement.DialogSentAllData;
 import com.alex.ecoscan.dialogs.settings.DialogChangeLogin;
 import com.alex.ecoscan.dialogs.settings.DialogChangePw;
-import com.alex.ecoscan.dialogs.settings.DialogGetSettingsFromServer;
 import com.alex.ecoscan.dialogs.settings.DialogResetSettings;
 import com.alex.ecoscan.managers.FormatMng;
 import com.alex.ecoscan.managers.SettingsMng;
@@ -37,12 +36,12 @@ import java.util.List;
 
 public class SettingsActivity extends AppCompatActivity
         implements DialogLength.DialogLengthListener, DialogAdvancedFilter.DialogAdvancedFilterListener {
-    CheckBox set_isAllowNonUniqueCode, set_isCheckLength, set_isAdvancedFilter, set_isAllowEditCode, set_isAllowEditOrder, set_isAddGPS, set_isEnableLogging, set_isSendData, set_isAutoSynch, set_isHideSynchData;
-    LinearLayout ll_isAllowEditCode, ll_isAllowEditOrders, ll_isAddGPS, ll_isEnableLogging, ll_isSentData, ll_isAutoSynch, ll_configureServer, ll_identifier, ll_lang, ll_isHideSynchData, ll_isAllowNonUniqueCode, ll_isCheckLength, ll_isAdvancedFilter;
+    CheckBox set_isAllowNonUniqueCode, set_isCheckLength, set_isAdvancedFilter, set_isAllowEditOrder, set_isAddGPS, set_isEnableLogging, set_isSendData, set_isAutoSynch, set_isHideSynchData;
+    LinearLayout ll_isAllowEditOrders, ll_isAddGPS, ll_isEnableLogging, ll_isSentData, ll_isAutoSynch, ll_configureServer, ll_identifier, ll_lang, ll_isHideSynchData, ll_isAllowNonUniqueCode, ll_isCheckLength, ll_isAdvancedFilter;
     Spinner set_lang;
     EditText set_identifier;
     ImageView set_btn_saveClientConfig;
-    TextView set_configureServer, set_sendAllData, set_deleteSynchData, set_clearAllData, set_getSettingsFromServer, set_changeLogin, set_changePw, set_resetSettings;
+    TextView set_configureServer, set_sendAllData, set_deleteSynchData, set_clearAllData, set_changeLogin, set_changePw, set_resetSettings;
 
     private SettingsMng settingsMng;
     @Override
@@ -100,28 +99,21 @@ public class SettingsActivity extends AppCompatActivity
         });
     }
     private void initializeAdminConfig() {
-//        set_isAllowEditCode = findViewById(R.id.set_isAllowEditCode);
         set_isAllowEditOrder = findViewById(R.id.set_isAllowEditOrder);
         set_isAddGPS = findViewById(R.id.set_isAddGPS);
         set_isEnableLogging = findViewById(R.id.set_isEnableLogging);
 
-//        set_isAllowEditCode.setChecked(settingsMng.isAllowEditCode());
         set_isAllowEditOrder.setChecked(settingsMng.isAllowEditOrders());
         set_isAddGPS.setChecked(settingsMng.isAddGPS());
         set_isEnableLogging.setChecked(settingsMng.isEnableLogin());
 
 
-//        ll_isAllowEditCode = findViewById(R.id.ll_isAllowEditCode);
         ll_isAllowEditOrders = findViewById(R.id.ll_isAllowEditOrders);
         ll_isAddGPS = findViewById(R.id.ll_isAddGPS);
         ll_isEnableLogging = findViewById(R.id.ll_isEnableLogging);
 
 
-//        ll_isAllowEditCode.setOnClickListener(v -> changeColor(ll_isAllowEditCode));
-//        set_isAllowEditCode.setOnCheckedChangeListener((btnView, isChecked) -> {
-//            changeColor(ll_isAllowEditCode);
-//            settingsMng.setIsAllowEditCode(isChecked);
-//        });
+
 
         ll_isAllowEditOrders.setOnClickListener(v -> changeColor(ll_isAllowEditOrders));
         set_isAllowEditOrder.setOnCheckedChangeListener((btnView, isChecked) -> {
@@ -199,11 +191,8 @@ public class SettingsActivity extends AppCompatActivity
         set_btn_saveClientConfig.setOnClickListener(v -> {
             set_btn_saveClientConfig.setBackgroundColor(Color.LTGRAY);
             Handler handler = new Handler();
-            handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    set_btn_saveClientConfig.setBackgroundColor(Color.TRANSPARENT); // or set your original color
-                }
+            handler.postDelayed(() -> {
+                set_btn_saveClientConfig.setBackgroundColor(Color.TRANSPARENT); // or set your original color
             }, 300);
             settingsMng.setIdentifier(formatMng.parseIntFromStringOrDefaultZero(set_identifier.getText().toString()));
             settingsMng.setLang(Lang.getCodeByLanguage(set_lang.getSelectedItem().toString()));
@@ -245,15 +234,11 @@ public class SettingsActivity extends AppCompatActivity
 
     }
     private void initializeButtons() {
-//        set_getSettingsFromServer = findViewById(R.id.set_getSettingsFromServer);
         set_changeLogin = findViewById(R.id.set_changeLogin);
         set_changePw = findViewById(R.id.set_changePw);
         set_resetSettings = findViewById(R.id.set_resetSettings);
 
-//        set_getSettingsFromServer.setOnClickListener(v -> {
-//            changeColorForButton(set_getSettingsFromServer);
-//            openDialogGetSettingsFromServer();
-//        });
+
 
         set_changeLogin.setOnClickListener(v -> {
             changeColorForButton(set_changeLogin);
@@ -305,11 +290,7 @@ public class SettingsActivity extends AppCompatActivity
         dialog.show(getSupportFragmentManager(), "Confirm to to delete all data");
     }
 
-    private void openDialogGetSettingsFromServer() {
-        Log.i("TAG", "openDialogServerConfig: ");
-        DialogGetSettingsFromServer dialog = new DialogGetSettingsFromServer();
-        dialog.show(getSupportFragmentManager(), "Get settings from server");
-    }
+
 
     private void openDialogChangeLogin() {
         Log.i("TAG", "openDialogServerConfig: ");
@@ -353,24 +334,18 @@ public class SettingsActivity extends AppCompatActivity
     private void changeColor(LinearLayout layout) {
         layout.setBackgroundColor(Color.LTGRAY);
         Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                int color = ContextCompat.getColor(getApplicationContext(), R.color.elements);
-                layout.setBackgroundColor(color);
-            }
+        handler.postDelayed(() -> {
+            int color = ContextCompat.getColor(getApplicationContext(), R.color.elements);
+            layout.setBackgroundColor(color);
         }, 600);
     }
 
     private void changeColorForButton(TextView layout) {
         layout.setBackgroundColor(Color.LTGRAY);
         Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                int color = ContextCompat.getColor(getApplicationContext(), R.color.btnSettings);
-                layout.setBackgroundColor(color);
-            }
+        handler.postDelayed(() -> {
+            int color = ContextCompat.getColor(getApplicationContext(), R.color.btnSettings);
+            layout.setBackgroundColor(color);
         }, 300);
     }
 

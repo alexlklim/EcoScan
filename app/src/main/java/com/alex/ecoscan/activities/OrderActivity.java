@@ -1,11 +1,5 @@
 package com.alex.ecoscan.activities;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,6 +8,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.alex.ecoscan.R;
 import com.alex.ecoscan.adapters.OrderAdapter;
@@ -33,9 +32,8 @@ public class OrderActivity extends AppCompatActivity implements OrderAdapter.OnI
     List<Code> codeList;
     Order order;
     RoomDB roomDB;
-    Context context;
     int orderId;
-    Button s_btn_comeBack, s_btn_deleteOrder;
+
     ImageView so_iv_synchStatus, rv_so_iv_del;
     TextView so_tv_dateTime, so_tv_orderNumber;
     SettingsMng settingsMng;
@@ -72,17 +70,7 @@ public class OrderActivity extends AppCompatActivity implements OrderAdapter.OnI
         synchMan = new SynchMan(this);
         List<Order> list = new ArrayList<>();
         list.add(roomDB.orderDAO().getOrderByOrderID(orderId));
-        synchMan.synchOrders(list, new SynchMan.OnSynchCompleteListener() {
-            @Override
-            public void onSynchComplete(int responseCode) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        initializeTextViews();
-                    }
-                });
-            }
-        });
+        synchMan.synchOrders(list, responseCode -> runOnUiThread(this::initializeTextViews));
     }
 
 
@@ -96,9 +84,7 @@ public class OrderActivity extends AppCompatActivity implements OrderAdapter.OnI
 
         if (order.getIsSynch() == 1) so_iv_synchStatus.setImageResource(R.drawable.ic_synch);
         else so_iv_synchStatus.setImageResource(R.drawable.ic_synch_not);
-        so_iv_synchStatus.setOnClickListener(v ->{
-            synch();
-        });
+        so_iv_synchStatus.setOnClickListener(v -> synch());
 
 
     }
@@ -128,8 +114,8 @@ public class OrderActivity extends AppCompatActivity implements OrderAdapter.OnI
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setView(dialog);
 
-        if (order.getIsSynch() == 0) d_confirm.setText("Delete order without synchoronization?");
-        else  d_confirm.setText("Delete order?");
+        if (order.getIsSynch() == 0) d_confirm.setText(R.string.delete_order_without_synchoronization);
+        else  d_confirm.setText(R.string.delete_order);
 
         btn_yes.setOnClickListener(v -> {
             Log.d(TAG, "showDialogConfirmationToDeleting: d_btn_yes");
@@ -151,7 +137,7 @@ public class OrderActivity extends AppCompatActivity implements OrderAdapter.OnI
             showDialogAlert();
         } else {
             roomDB.codeDAO().delete(code);
-            orderAdapter.notifyDataSetChanged();
+//            orderAdapter.notifyDataSetChanged();
             initializeRecyclerView();
 
         }
@@ -168,7 +154,7 @@ public class OrderActivity extends AppCompatActivity implements OrderAdapter.OnI
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setView(dialog);
 
-        d_confirm.setText("You try to delete last code in order? After this order will delete automatically");
+        d_confirm.setText(R.string.you_try_to_delete_last_code_in_order_after_this_order_will_delete_automatically);
 
         btn_yes.setOnClickListener(v -> {
             DatabaseMng.deleteOrder(roomDB ,order, codeList);

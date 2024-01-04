@@ -21,7 +21,6 @@ public class DialogConfirmDelSynchData extends AppCompatDialogFragment {
     private static final String TAG = "DialogConfirmDelSynchData";
 
     RoomDB roomDB;
-    private FragmentActivity fragmentActivity;
     SettingsMng settingsMng;
     @NonNull
     @Override
@@ -32,7 +31,7 @@ public class DialogConfirmDelSynchData extends AppCompatDialogFragment {
         builder.setView(view).setTitle("Delete all synch data");
         settingsMng = new SettingsMng(requireContext());
         roomDB = RoomDB.getInstance(requireContext());
-        fragmentActivity = requireActivity();
+        FragmentActivity fragmentActivity = requireActivity();
 
         Button btn_yes = view.findViewById(R.id.btn_yes);
         Button btn_no = view.findViewById(R.id.btn_no);
