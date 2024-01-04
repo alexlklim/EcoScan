@@ -2,6 +2,7 @@ package com.alex.ecoscan.managers;
 
 import android.content.Context;
 
+import com.alex.ecoscan.R;
 import com.alex.ecoscan.database.RoomDB;
 import com.alex.ecoscan.model.Code;
 import com.alex.ecoscan.model.Order;
@@ -16,11 +17,9 @@ import java.util.List;
 
 
 public class SynchMan  {
-    private static final String TAG = "SynchMan";
     private static Context context;
     RoomDB roomDB;
     SettingsMng sm;
-    URL url;
 
     public SynchMan(Context context) {
         SynchMan.context = context;
@@ -34,12 +33,8 @@ public class SynchMan  {
 
 
     public void synchOrders(List<Order> orders, OnSynchCompleteListener synchCompleteListener) {
-        if (!checkCommonCases()) {
-            return;
-        }
-
+        if (!checkCommonCases()) return;
         roomDB = RoomDB.getInstance(context);
-
         List<OrderWithCodes> orderWithCodesList = new ArrayList<>();
         for (Order order : orders) {
             List<Code> codes = roomDB.codeDAO().getAllByOrderID(order.getID());
@@ -48,36 +43,21 @@ public class SynchMan  {
 
         Gson gson = new Gson();
         String json = gson.toJson(orderWithCodesList);
-
-        System.out.println(json);
-
-        sendPostRequestAsync(sm.getServerAddress(), json, new OnPostRequestCompleteListener() {
-            @Override
-            public void onPostRequestComplete(int responseCode) {
-                System.out.println("Response Code: " + responseCode);
-
-                if (responseCode == 200) {
-                    System.out.println("Request successful");
-                    changeToSynchOrders(orders);
-                } else {
-                    System.out.println("Request failed");
-                    Tost.show("Synchronization failed", context);
-                }
-
-                // Notify the caller that the synch operation is complete
-                synchCompleteListener.onSynchComplete(responseCode);
-            }
+        sendPostRequestAsync(sm.getServerAddress(), json, responseCode -> {
+            if (responseCode == 200) changeToSynchOrders(orders);
+            else Tost.show("Synchronization failed", context);
+            // Notify the caller that the synch operation is complete
+            synchCompleteListener.onSynchComplete(responseCode);
         });
     }
 
 
 
-
-    public boolean checkCommonCases() {
+     public boolean checkCommonCases() {
         // server is not configured
         sm = new SettingsMng(context);
         if (!sm.isServerConfigured()){
-            Tost.show("Server is not configured", context);
+            Tost.show(context.getString(R.string.server_is_not_configured), context);
             return false;
         }
         // no internet connection

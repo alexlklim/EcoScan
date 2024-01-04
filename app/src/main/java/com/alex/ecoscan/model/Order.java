@@ -16,16 +16,12 @@ public class Order {
     @ColumnInfo(name = "ID")
     @PrimaryKey(autoGenerate = true)
     private int ID;
-
     @ColumnInfo(name = "orderNum")
     private String orderNum;
-
     @ColumnInfo(name = "date")
     private String date;
-
     @ColumnInfo(name = "isSynch")
     private int isSynch;
-
     @ColumnInfo(name = "isHidden")
     private int isHidden;
 

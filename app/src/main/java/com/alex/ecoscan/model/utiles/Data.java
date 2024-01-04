@@ -1,7 +1,6 @@
 package com.alex.ecoscan.model.utiles;
 
-public class Db {
-    public static final String PREF_NAME = "EcoScanSettings";
+public class Data {
 
     // for Filter Configuration
     public static final String

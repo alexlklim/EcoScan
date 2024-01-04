@@ -111,6 +111,7 @@
     <string name="default_settings_was_set">Default settings was set</string>
     <string name="order_number_already_exists">Order number already exists</string>
     <string name="success">Success</string>
+    <string name="server_is_not_configured">Server is not configured</string>
 
 
 </resources>

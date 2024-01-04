@@ -52,12 +52,12 @@ public class OrdersActivity extends AppCompatActivity implements OrdersAdapter.O
         ImageView menu = findViewById(R.id.os_menu);
         menu.setOnClickListener(v -> showPopupMenu(menu));
 
-        autoSynch();
+        if (settingsMng.isAutoSynch()) synch();
 
     }
 
-    private void autoSynch() {
-        if (settingsMng.isServerConfigured() && settingsMng.isAutoSynch() && settingsMng.isSentData()){
+    private void synch() {
+        if (settingsMng.isServerConfigured() && settingsMng.isSentData()){
             synchMan = new SynchMan(this);
             synchMan.synchOrders(roomDB.orderDAO().getNonSynch(), responseCode -> runOnUiThread(this::initializeRecyclerView));
         }
@@ -103,7 +103,8 @@ public class OrdersActivity extends AppCompatActivity implements OrdersAdapter.O
         popupMenu.setOnMenuItemClickListener(item -> {
             int itemId = item.getItemId(); // Store the item ID in a final variable
             if (itemId == R.id.menu_synchOrders) {
-                autoSynch();
+                synch();
+                initializeRecyclerView();
                 return true;
             } else if (itemId == R.id.menu_hideOrders) {
               showNotSynchOrders = true;

@@ -5,7 +5,7 @@ import android.content.SharedPreferences;
 
 import com.alex.ecoscan.interfaces.ISettingsMng;
 import com.alex.ecoscan.model.enums.Lang;
-import com.alex.ecoscan.model.utiles.Db;
+import com.alex.ecoscan.model.utiles.Data;
 import com.alex.ecoscan.model.utiles.Util;
 
 import java.util.HashSet;
@@ -22,108 +22,108 @@ public class SettingsMng implements ISettingsMng {
 
     @Override
     public void setIsAllowNonUniqueCode(boolean isAllowNonUniqueCode) {
-        pref.edit().putBoolean(Db.IS_ALLOW_NON_UNIQUE_CODE, isAllowNonUniqueCode).apply();
+        pref.edit().putBoolean(Data.IS_ALLOW_NON_UNIQUE_CODE, isAllowNonUniqueCode).apply();
 
 
     }
 
     @Override
     public void setIsCheckLength(boolean isCheckLength) {
-        pref.edit().putBoolean(Db.IS_CHECK_LENGTH, isCheckLength).apply();
+        pref.edit().putBoolean(Data.IS_CHECK_LENGTH, isCheckLength).apply();
     }
 
     @Override
     public void setBlockLength(int length, int min, int max) {
-        pref.edit().putInt(Db.LENGTH, length)
-                .putInt(Db.LENGTH_MIN, min).putInt(Db.LENGTH_MAX, max)
+        pref.edit().putInt(Data.LENGTH, length)
+                .putInt(Data.LENGTH_MIN, min).putInt(Data.LENGTH_MAX, max)
                 .apply();
     }
 
     @Override
     public void setIsAdvancedFilter(boolean isAdvancedFilter) {
-        pref.edit().putBoolean(Db.IS_ADVANCED_FILTER, isAdvancedFilter).apply();
+        pref.edit().putBoolean(Data.IS_ADVANCED_FILTER, isAdvancedFilter).apply();
     }
     @Override
     public void setBlockAdvancedFilter(String prefix, String suffix, String ending, HashSet<String> labels) {
-        pref.edit().putString(Db.PREFIX, prefix)
-                .putString(Db.SUFFIX, suffix)
-                .putString(Db.ENDING, ending)
-                .putStringSet(Db.LABELS, labels)
+        pref.edit().putString(Data.PREFIX, prefix)
+                .putString(Data.SUFFIX, suffix)
+                .putString(Data.ENDING, ending)
+                .putStringSet(Data.LABELS, labels)
                 .apply();
 
     }
 
     @Override
     public void setIsAllowEditCode(boolean isAllowEditCode) {
-        pref.edit().putBoolean(Db.IS_ALLOW_EDIT_CODE, isAllowEditCode).apply();
+        pref.edit().putBoolean(Data.IS_ALLOW_EDIT_CODE, isAllowEditCode).apply();
 
     }
 
     @Override
     public void setIsAllowEditOrders(boolean isAllowEditOrders) {
-        pref.edit().putBoolean(Db.IS_ALLOW_EDIT_ORDER, isAllowEditOrders).apply();
+        pref.edit().putBoolean(Data.IS_ALLOW_EDIT_ORDER, isAllowEditOrders).apply();
 
     }
 
     @Override
     public void setIsAddGPSToCode(boolean isAddGPSToCode) {
-        pref.edit().putBoolean(Db.IS_ADD_GPS, isAddGPSToCode).apply();
+        pref.edit().putBoolean(Data.IS_ADD_GPS, isAddGPSToCode).apply();
 
     }
 
     @Override
     public void setIsEnableLogin(boolean isEnableLogin) {
-        pref.edit().putBoolean(Db.IS_ENABLE_LOGIN, isEnableLogin).apply();
+        pref.edit().putBoolean(Data.IS_ENABLE_LOGIN, isEnableLogin).apply();
 
     }
 
     @Override
     public void setIsSendData(boolean isSendData) {
-        pref.edit().putBoolean(Db.IS_SENT_DATA, isSendData).apply();
+        pref.edit().putBoolean(Data.IS_SENT_DATA, isSendData).apply();
 
     }
 
     @Override
     public void setIsAutoSynch(boolean isAutoSynch) {
-        pref.edit().putBoolean(Db.IS_AUTO_SYNCH, isAutoSynch).apply();
+        pref.edit().putBoolean(Data.IS_AUTO_SYNCH, isAutoSynch).apply();
 
     }
 
     @Override
     public void setServerAddress(String serverAddress) {
-        pref.edit().putString(Db.SERVER_ADDRESS, serverAddress).apply();
+        pref.edit().putString(Data.SERVER_ADDRESS, serverAddress).apply();
 
     }
     @Override
     public void setIsServerConfigured(boolean isServerConfigured) {
-        pref.edit().putBoolean(Db.IS_SERVER_CONFIGURED, isServerConfigured).apply();
+        pref.edit().putBoolean(Data.IS_SERVER_CONFIGURED, isServerConfigured).apply();
 
     }
 
     @Override
     public void setLang(String lang) {
-        pref.edit().putString(Db.LANG, lang).apply();
+        pref.edit().putString(Data.LANG, lang).apply();
     }
     @Override
     public void setIdentifier(int identifier) {
-        pref.edit().putInt(Db.IDENTIFIER, identifier).apply();}
+        pref.edit().putInt(Data.IDENTIFIER, identifier).apply();}
 
 
     @Override
     public void setNewLogin(String login) {
-        pref.edit().putString(Db.LOGIN, login).apply();
+        pref.edit().putString(Data.LOGIN, login).apply();
 
     }
 
     @Override
     public void setNewPw(String pw) {
-        pref.edit().putString(Db.PW, pw).apply();
+        pref.edit().putString(Data.PW, pw).apply();
 
     }
 
     @Override
     public void setIsHideSynchData(boolean isHideSynchData) {
-        pref.edit().putBoolean(Db.IS_HIDE_SYNCH_DATA, isHideSynchData).apply();
+        pref.edit().putBoolean(Data.IS_HIDE_SYNCH_DATA, isHideSynchData).apply();
 
     }
 
@@ -166,89 +166,89 @@ public class SettingsMng implements ISettingsMng {
 
     // getters
     public boolean isAllowNonUniqueCode() {
-        return pref.getBoolean(Db.IS_ALLOW_NON_UNIQUE_CODE, true);
+        return pref.getBoolean(Data.IS_ALLOW_NON_UNIQUE_CODE, true);
     }
     public boolean isCheckLength() {
-        return pref.getBoolean(Db.IS_CHECK_LENGTH, false);
+        return pref.getBoolean(Data.IS_CHECK_LENGTH, false);
     }
     public int getLength() {
-        return pref.getInt(Db.LENGTH, 0);
+        return pref.getInt(Data.LENGTH, 0);
     }
     public int getLengthMAX() {
-        return pref.getInt(Db.LENGTH_MAX, 0);
+        return pref.getInt(Data.LENGTH_MAX, 0);
     }
     public int getLengthMIN() {
-        return pref.getInt(Db.LENGTH_MIN, 0);
+        return pref.getInt(Data.LENGTH_MIN, 0);
     }
 
 
     public boolean isAdvancedFilter() {
-        return pref.getBoolean(Db.IS_ADVANCED_FILTER, false);
+        return pref.getBoolean(Data.IS_ADVANCED_FILTER, false);
     }
     public String getPrefix() {
-        return pref.getString(Db.PREFIX, "");
+        return pref.getString(Data.PREFIX, "");
     }
 
     public String getSuffix() {
-        return pref.getString(Db.SUFFIX, "");
+        return pref.getString(Data.SUFFIX, "");
     }
 
     public String getEnding() {
-        return pref.getString(Db.ENDING, "");
+        return pref.getString(Data.ENDING, "");
     }
     public Set<String> getLabels() {
-        return pref.getStringSet(Db.LABELS, new HashSet<>());
+        return pref.getStringSet(Data.LABELS, new HashSet<>());
     }
 
 
 
     public boolean isAllowEditOrders() {
-        return pref.getBoolean(Db.IS_ALLOW_EDIT_ORDER, false);
+        return pref.getBoolean(Data.IS_ALLOW_EDIT_ORDER, false);
     }
     public boolean isAddGPS() {
-        return pref.getBoolean(Db.IS_ADD_GPS, true);
+        return pref.getBoolean(Data.IS_ADD_GPS, true);
     }
     public boolean isEnableLogin() {
-        return pref.getBoolean(Db.IS_ENABLE_LOGIN, false);
+        return pref.getBoolean(Data.IS_ENABLE_LOGIN, false);
     }
 
 
 
     public boolean isSentData() {
-        return pref.getBoolean(Db.IS_SENT_DATA, false);
+        return pref.getBoolean(Data.IS_SENT_DATA, false);
     }
 
     public boolean isAutoSynch() {
-        return pref.getBoolean(Db.IS_AUTO_SYNCH, false);
+        return pref.getBoolean(Data.IS_AUTO_SYNCH, false);
     }
     public String getServerAddress() {
         return pref.getString(Util.URL, Util.URL);
     }
     public boolean isServerConfigured() {
-        return pref.getBoolean(Db.IS_SERVER_CONFIGURED, false);
+        return pref.getBoolean(Data.IS_SERVER_CONFIGURED, false);
     }
 
 
 
     public int getIdentifier() {
-        return pref.getInt(Db.IDENTIFIER, 0);
+        return pref.getInt(Data.IDENTIFIER, 0);
     }
     public String getLang() {
-        return pref.getString(Db.LANG, Lang.EN.getCode());
+        return pref.getString(Data.LANG, Lang.EN.getCode());
     }
 
 
     public String getLogin() {
-        return pref.getString(Db.LOGIN, "admin");
+        return pref.getString(Data.LOGIN, "admin");
     }
 
     public String getPassword() {
-        return pref.getString(Db.PW, "admin");
+        return pref.getString(Data.PW, "admin");
     }
 
 
     public boolean isHideSynchData() {
-        return pref.getBoolean(Db.IS_HIDE_SYNCH_DATA, false);
+        return pref.getBoolean(Data.IS_HIDE_SYNCH_DATA, false);
     }
 
 
