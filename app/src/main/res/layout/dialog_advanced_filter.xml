@@ -7,7 +7,8 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent"
+        android:baselineAligned="false">
 
 
         <LinearLayout
@@ -19,22 +20,22 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="@style/simpleText"
-                android:text="Prefix" />
+                android:text="@string/prefix" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="@style/simpleText"
-                android:text="Suffix" />
+                android:text="@string/suffix" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="@style/simpleText"
-                android:text="Ending" />
+                android:text="@string/ending" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="@style/simpleText"
-                android:text="Label" />
+                android:text="@string/label" />
         </LinearLayout>
 
         <LinearLayout
@@ -49,7 +50,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:ems="10"
-                android:hint="none"
+                android:hint="@string/none"
                 android:inputType="text"
                 android:text="" />
             <EditText
@@ -57,14 +58,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:ems="10"
-                android:hint="none"
+                android:hint="@string/none"
                 android:text="" />
             <EditText
                 android:id="@+id/set_ending"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:ems="10"
-                android:hint="none"
+                android:hint="@string/none"
                 android:inputType="text"
                 android:text="" />
 
@@ -72,7 +73,7 @@
                 android:id="@+id/set_labels"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:contentDescription="Labels"
+                android:contentDescription="@string/labels"
                 android:minHeight="48dp" />
 
         </LinearLayout>
@@ -98,8 +99,8 @@
             android:layout_weight="1"
             android:layout_margin="20dp"
             android:minWidth="100dp"
-            android:text="Clear"
-            android:contentDescription="Clear label list"
+            android:text="@string/clear"
+            android:contentDescription="@string/clear_label_list"
             android:src="@drawable/ic_clear"
             android:background="@android:color/transparent"
             android:layout_height="wrap_content" />
@@ -110,7 +111,7 @@
         android:layout_width="wrap_content"
         android:layout_margin="20dp"
         android:minWidth="150dp"
-        android:text="Apply"
+        android:text="@string/apply"
         style="@style/btnSettings"
         android:layout_height="wrap_content" />
 

@@ -2,11 +2,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/menu_synchOrders"
-        android:title="Synch with server" />
+        android:title="@string/synch_with_server" />
     <item
         android:id="@+id/menu_hideOrders"
-        android:title="Hide synch orders" />
+        android:title="@string/hide_synch_orders" />
     <item
         android:id="@+id/menu_showOrders"
-        android:title="Show all orders" />
+        android:title="@string/show_all_orders" />
 </menu>

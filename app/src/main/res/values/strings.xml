@@ -74,6 +74,30 @@
     <string name="order_was_successfully_saved">Order was successfully saved</string>
     <string name="okay">okay</string>
     <string name="all_labels_are_accepted">All labels are accepted</string>
+    <string name="login">login</string>
+    <string name="password">password</string>
+    <string name="login2">Login</string>
+    <string name="prefix">Prefix</string>
+    <string name="suffix">Suffix</string>
+    <string name="ending">Ending</string>
+    <string name="label">Label</string>
+    <string name="none">none</string>
+    <string name="labels">Labels</string>
+    <string name="clear_label_list">Clear label list</string>
+    <string name="clear">Clear</string>
+    <string name="apply">Apply</string>
+    <string name="new_login">new login</string>
+    <string name="change">Change</string>
+    <string name="code_length">Code length</string>
+    <string name="min_length">MIN length</string>
+    <string name="max_length">MAX length</string>
+    <string name="server_address">Server address</string>
+    <string name="https">https://...</string>
+    <string name="result_connection">Result connection</string>
+    <string name="check_connection">Check connection</string>
+    <string name="synch_with_server">Synch with server</string>
+    <string name="hide_synch_orders">Hide synch orders</string>
+    <string name="show_all_orders">Show all orders</string>
 
 
 </resources>

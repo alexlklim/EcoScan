@@ -13,7 +13,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             style="@style/simpleText"
-            android:text="Server address" />
+            android:text="@string/server_address" />
 
 
         <EditText
@@ -21,7 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:ems="10"
-            android:hint="https://..."
+            android:hint="@string/https"
             android:inputType="text"
             android:text="" />
 
@@ -44,7 +44,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             style="@style/simpleText"
-            android:text="Result connection" />
+            android:text="@string/result_connection" />
     </LinearLayout>
     <Button
         android:id="@+id/set_btn_checkConnection"
@@ -52,7 +52,7 @@
         android:layout_width="wrap_content"
         android:layout_margin="20dp"
         android:minWidth="150dp"
-        android:text="Check connection"
+        android:text="@string/check_connection"
         style="@style/btnSettings"
         android:layout_height="wrap_content" />
 

@@ -19,17 +19,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/simpleText"
-            android:text="Code length" />
+            android:text="@string/code_length" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/simpleText"
-            android:text="MIN length" />
+            android:text="@string/min_length" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/simpleText"
-            android:text="MAX length" />
+            android:text="@string/max_length" />
     </LinearLayout>
 
     <LinearLayout
@@ -75,7 +75,7 @@
         android:layout_width="wrap_content"
         android:layout_margin="20dp"
         android:minWidth="150dp"
-        android:text="Apply"
+        android:text="@string/apply"
         style="@style/btnSettings"
         android:layout_height="wrap_content" />
 
