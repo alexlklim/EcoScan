@@ -26,6 +26,7 @@ import com.alex.ecoscan.R;
 import com.alex.ecoscan.adapters.CodeAdapter;
 import com.alex.ecoscan.database.RoomDB;
 import com.alex.ecoscan.managers.DatabaseMng;
+import com.alex.ecoscan.managers.NetworkMng;
 import com.alex.ecoscan.managers.SettingsMng;
 import com.alex.ecoscan.managers.SynchMan;
 import com.alex.ecoscan.managers.Tost;
@@ -86,7 +87,7 @@ public class ScanActivity extends AppCompatActivity implements CodeAdapter.OnIte
         getLastLocation();
 
         Code code;
-        if (settingsMng.isAddGPS()){
+        if (settingsMng.isAddGPS() && NetworkMng.isNetworkAvailable(this)){
             code = filteringData(new Code(
                     decodedData, decodedLabelType,
                     String.valueOf(currentLocation.getLongitude()),
@@ -250,13 +251,13 @@ public class ScanActivity extends AppCompatActivity implements CodeAdapter.OnIte
         if (roomDB.orderDAO().isExistByOrderNum(orderNumber) && result){
             d_resultText.setText(R.string.order_was_saved_successfully);
             d_resultImage.setImageResource(R.drawable.ic_success);
-            Tost.show("Success", this);
+            Tost.show(getString(R.string.success), this);
             autoSynch();
 
         } else{
             d_resultText.setText(R.string.something_wrong);
             d_resultImage.setImageResource(R.drawable.ic_fail);
-            Tost.show("Something wrong", this);
+            Tost.show(getString(R.string.something_wrong), this);
         }
 
 
