@@ -4,6 +4,13 @@
 
 EcoScan is a Android-based application designed for Zebra devices equipped with embedded scanners. This solution enables seamless code reading, order creation, advanced filtering, and secure transmission to the server. This documentation serves as a guide to understanding, configuring, and customizing the application for various business needs.
 
+Technologies: Java, Room, EMDK, AndroidStudio
+
+# Dependencies
+
+![image](https://github.com/alexlklim/EcoScan/assets/91628959/fb4691e2-f1c1-44e8-8490-a7456030c639)
+
+
 # Start Guide
 
 ![image](https://github.com/alexlklim/EcoScan/assets/91628959/45d1df24-6dd6-4d37-b690-fb7b6f279f57)
