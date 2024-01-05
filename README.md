@@ -7,6 +7,9 @@ The ScanCode is a Android-based application designed for Zebra devices equipped 
 
 ![image](https://github.com/alexlklim/EcoScan/assets/91628959/45d1df24-6dd6-4d37-b690-fb7b6f279f57)
 
+# Configure Filter
+
+![image](https://github.com/alexlklim/EcoScan/assets/91628959/0f2792cc-6e5f-4ed2-82bf-908cf64e176b)
 
 # ARCHITECTURE
 Codes are scanned with embedded zebra scanner and sent to the server (if server is configured). It allows reading different types of codes, creating orders and synchronization.
