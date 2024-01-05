@@ -10,6 +10,9 @@ Technologies: Java, Room, EMDK, AndroidStudio
 
 ![image](https://github.com/alexlklim/EcoScan/assets/91628959/fb4691e2-f1c1-44e8-8490-a7456030c639)
 
+# Permissions
+
+![image](https://github.com/alexlklim/EcoScan/assets/91628959/5e9e7ee4-1961-419e-b141-3d515022b8ca)
 
 # Start Guide
 
