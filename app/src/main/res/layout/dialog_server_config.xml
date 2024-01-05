@@ -34,7 +34,7 @@
         android:layout_height="match_parent" >
         <ImageView
             android:id="@+id/set_connectionResultImage"
-            android:src="@drawable/ic_fail"
+            android:src="@drawable/ic_success"
             android:layout_width="40dp"
             android:visibility="visible"
             android:layout_height="40dp"/>
@@ -44,7 +44,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             style="@style/simpleText"
-            android:text="@string/result_connection" />
+            android:text="@string/server_was_configured" />
     </LinearLayout>
     <Button
         android:id="@+id/set_btn_checkConnection"

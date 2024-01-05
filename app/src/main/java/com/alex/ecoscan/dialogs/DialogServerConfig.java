@@ -34,7 +34,7 @@ public class DialogServerConfig extends AppCompatDialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(requireActivity());
         LayoutInflater inflater = requireActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.dialog_server_config, null);
-        builder.setView(view).setTitle("Server configuration");
+        builder.setView(view).setTitle(R.string.server_configuration);
         settingsMng = new SettingsMng(requireContext());
 
         set_btn_checkConnection = view.findViewById(R.id.set_btn_checkConnection);

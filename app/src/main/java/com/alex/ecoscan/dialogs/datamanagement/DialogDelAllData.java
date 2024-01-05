@@ -26,7 +26,7 @@ public class DialogDelAllData extends AppCompatDialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(requireActivity());
         LayoutInflater inflater = requireActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.dialog_confirm, null);
-        builder.setView(view).setTitle("Delete all data about orders");
+        builder.setView(view).setTitle(R.string.delete_all_data_about_orders);
         settingsMng = new SettingsMng(requireContext());
         roomDB = RoomDB.getInstance(requireContext());
 
@@ -36,7 +36,7 @@ public class DialogDelAllData extends AppCompatDialogFragment {
         btn_yes.setOnClickListener(v -> {
             roomDB.orderDAO().deleteAllOrders();
             roomDB.codeDAO().deleteAllCodes();
-            Tost.show("All  orders was deleted", requireContext());
+            Tost.show(getString(R.string.all_orders_was_deleted), requireContext());
             dismiss();
         });
 

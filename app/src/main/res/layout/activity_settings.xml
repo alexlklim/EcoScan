@@ -275,6 +275,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="5dp"
                     android:layout_weight="2"
+                    android:checked="true"
                     android:text="" />
             </LinearLayout>
 

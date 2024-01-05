@@ -167,7 +167,6 @@ public class ScanActivity extends AppCompatActivity implements CodeAdapter.OnIte
     @Override
     public void onItemClick(Code code) {
         Log.i(TAG, "onItemClick: ");
-        System.out.println("Code: " + code.getCode());
     }
 
 
@@ -175,12 +174,10 @@ public class ScanActivity extends AppCompatActivity implements CodeAdapter.OnIte
     public Code filteringData(Code code) {
         Log.i(TAG, "filteringData: code");
         if (!settingsMng.isAllowNonUniqueCode() && codeList.stream().anyMatch(c -> c.getCode().equals(code.getCode()))) {
-            Log.d(TAG, "filteringData: CODE NON UNIQUE");
             return null;
         }
 
         if (settingsMng.isCheckLength()) {
-            Log.d(TAG, "filteringData: isCheckCodeLength=" + settingsMng.isCheckLength());
             int length = code.getCode().length();
             if (settingsMng.getLength() != 0 && settingsMng.getLength() != length) return null;
             if (settingsMng.getLengthMIN() != 0 && settingsMng.getLengthMIN() < length) return null;
@@ -188,7 +185,6 @@ public class ScanActivity extends AppCompatActivity implements CodeAdapter.OnIte
         }
 
         if (settingsMng.isAdvancedFilter()) {
-            Log.d(TAG, "filteringData: isDoAdvancedFilter=" + settingsMng.isAdvancedFilter());
             String cod = code.getCode();
             if (!settingsMng.getPrefix().equals("") && cod.startsWith(settingsMng.getPrefix())) return null;
             if (!settingsMng.getSuffix().equals("") && cod.contains(settingsMng.getSuffix())) return null;
@@ -198,7 +194,6 @@ public class ScanActivity extends AppCompatActivity implements CodeAdapter.OnIte
                 if (!settingsMng.getLabels().contains(code.getLabel())) return null;
             }
         }
-        Log.d(TAG, "filteringData: code passed all filters");
         return code;
     }
 
@@ -220,11 +215,10 @@ public class ScanActivity extends AppCompatActivity implements CodeAdapter.OnIte
 
         btn_yes.setOnClickListener(v -> {
             if (codeList.isEmpty()){
-               Tost.show("Order is empty", this);
+               Tost.show(getString(R.string.order_is_empty), this);
 
             } else {
                 boolean result = DatabaseMng.saveNewOrder(roomDB, orderNumber, codeList);
-                System.out.println(result);
                 if (result) Tost.show("Order was saved", this);
                 alertDialog.dismiss();
                 showDialogOrderSavedResult(result);

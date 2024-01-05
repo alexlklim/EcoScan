@@ -36,7 +36,7 @@ public class DialogSentAllData extends AppCompatDialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(requireActivity());
         LayoutInflater inflater = requireActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.dialog_confirm, null);
-        builder.setView(view).setTitle("Sent all data to server");
+        builder.setView(view).setTitle(R.string.sent_all_data_to_server2);
         settingsMng = new SettingsMng(requireContext());
         synchMan = new SynchMan(requireContext());
         roomDB = RoomDB.getInstance(requireContext());
@@ -62,7 +62,7 @@ public class DialogSentAllData extends AppCompatDialogFragment {
 
         synchMan.synchOrders(list, responseCode -> {
             if (fragmentActivity != null) {  // Check if the activity is not null
-                fragmentActivity.runOnUiThread(() -> Tost.show("All data was synch", fragmentActivity));
+                fragmentActivity.runOnUiThread(() -> Tost.show(getString(R.string.all_data_was_synch), fragmentActivity));
             }
         });
     }

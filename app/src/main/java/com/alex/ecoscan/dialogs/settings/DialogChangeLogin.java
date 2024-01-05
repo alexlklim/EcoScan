@@ -25,14 +25,14 @@ public class DialogChangeLogin extends AppCompatDialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(requireActivity());
         LayoutInflater inflater = requireActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.dialog_change_login_pw, null);
-        builder.setView(view).setTitle("Change login");
+        builder.setView(view).setTitle(R.string.change_login);
         settingsMng = new SettingsMng(requireContext());
 
         EditText d_login = view.findViewById(R.id.d_first);
         EditText d_pw = view.findViewById(R.id.d_second);
 
-        d_login.setHint("new login");
-        d_pw.setHint("password");
+        d_login.setHint(R.string.new_login);
+        d_pw.setHint(R.string.password);
         Button btnConfirm = view.findViewById(R.id.d_btn_confirm);
 
         btnConfirm.setOnClickListener(v -> {
@@ -40,10 +40,10 @@ public class DialogChangeLogin extends AppCompatDialogFragment {
             String pwCorrect = settingsMng.getPassword();
             if (pwToCheck.equals(pwCorrect)){
                 settingsMng.setNewLogin(d_login.getText().toString());
-                Tost.show("Login was changed", requireContext());
+                Tost.show(getString(R.string.login_was_changed), requireContext());
                 dismiss();
             }
-            Tost.show("Something wrong", requireContext());
+            Tost.show(getString(R.string.something_wrong), requireContext());
 
         });
 

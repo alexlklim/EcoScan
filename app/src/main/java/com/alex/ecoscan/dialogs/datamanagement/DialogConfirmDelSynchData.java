@@ -28,7 +28,7 @@ public class DialogConfirmDelSynchData extends AppCompatDialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(requireActivity());
         LayoutInflater inflater = requireActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.dialog_confirm, null);
-        builder.setView(view).setTitle("Delete all synch data");
+        builder.setView(view).setTitle(R.string.delete_all_synch_data);
         settingsMng = new SettingsMng(requireContext());
         roomDB = RoomDB.getInstance(requireContext());
         FragmentActivity fragmentActivity = requireActivity();
@@ -38,7 +38,7 @@ public class DialogConfirmDelSynchData extends AppCompatDialogFragment {
 
         btn_yes.setOnClickListener(v -> {
             roomDB.orderDAO().deleteAllSynch();
-            Tost.show("All synch orders was deleted", requireContext());
+            Tost.show(getString(R.string.all_synch_orders_was_deleted), requireContext());
             dismiss();
             dismiss();
         });

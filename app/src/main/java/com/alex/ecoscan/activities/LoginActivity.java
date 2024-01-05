@@ -39,7 +39,7 @@ public class LoginActivity extends AppCompatActivity {
             }
             else{
                 login_result.setText(R.string.login_or_password_are_incorrect);
-                Tost.show("Login or password are incorrect!", this);
+                Tost.show(getString(R.string.login_or_password_are_incorrect), this);
             }
         });
     }

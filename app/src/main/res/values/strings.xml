@@ -112,6 +112,21 @@
     <string name="order_number_already_exists">Order number already exists</string>
     <string name="success">Success</string>
     <string name="server_is_not_configured">Server is not configured</string>
+    <string name="all_synch_orders_was_deleted">All synch orders was deleted</string>
+    <string name="delete_all_synch_data">Delete all synch data</string>
+    <string name="delete_all_data_about_orders">Delete all data about orders</string>
+    <string name="all_orders_was_deleted">All  orders was deleted</string>
+    <string name="all_data_was_synch">All data was synch</string>
+    <string name="sent_all_data_to_server2">Sent all data to server</string>
+    <string name="login_was_changed">Login was changed</string>
+    <string name="new_login1">new login</string>
+    <string name="change_login1">Change login</string>
+    <string name="advanced_filter1">Advanced Filter</string>
+    <string name="create_new_order1">Create new order</string>
+    <string name="length">Length</string>
+    <string name="server_configuration1">Server configuration</string>
+    <string name="login_or_password_are_incorrect1">Login or password are incorrect!</string>
+    <string name="order_is_empty">Order is empty</string>
 
 
 </resources>

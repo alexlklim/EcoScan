@@ -26,7 +26,7 @@ public class DialogCreateNewOrder extends AppCompatDialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(requireActivity());
         LayoutInflater inflater = requireActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.dialog_create_order, null);
-        builder.setView(view).setTitle("Create new order");
+        builder.setView(view).setTitle(R.string.create_new_order);
 
         EditText d_orderNum = view.findViewById(R.id.d_orderNum);
         Button btnConfirm = view.findViewById(R.id.d_btn_confirm);

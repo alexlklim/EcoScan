@@ -29,7 +29,7 @@ public class DialogLength extends AppCompatDialogFragment {
         LayoutInflater inflater = requireActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.dialog_length, null);
         FormatMng formatMng = new FormatMng();
-        builder.setView(view).setTitle("Length");
+        builder.setView(view).setTitle(R.string.length);
         settingsMng = new SettingsMng(requireContext());
 
         Button btnLength = view.findViewById(R.id.set_btn_length);
