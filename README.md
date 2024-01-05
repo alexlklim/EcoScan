@@ -17,7 +17,6 @@ Codes are scanned with embedded zebra scanner and sent to the server (if server 
 ![image](https://github.com/alexlklim/EcoScan/assets/91628959/ee8a830c-f605-4cc6-9476-5afbc070127a)
 
 # SERVER CONFIGURATION
-The structure of Json file. It includes information about order, identifier and list of codes.
-To connect application to your own server, create a endpoint which can receive data and return response code 200. After this check connection in Server configuration sections end switch on Send data to server
 
-![image](https://github.com/alexlklim/EcoScan/assets/91628959/808da58a-5ad4-490f-a63f-d60b89cabe68)
+![image](https://github.com/alexlklim/EcoScan/assets/91628959/8cde3eed-f3cc-46e8-b221-9d4fbf60e379)
+
