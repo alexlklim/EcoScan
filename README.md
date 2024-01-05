@@ -28,3 +28,7 @@ Codes are scanned with embedded zebra scanner and sent to the server (if server 
 
 ![image](https://github.com/alexlklim/EcoScan/assets/91628959/8cde3eed-f3cc-46e8-b221-9d4fbf60e379)
 
+# Full documentation
+
+https://drive.google.com/drive/folders/1LMXHCUDayzJIU9Guemr_-xSP93Hv4fGk?usp=drive_link
+
